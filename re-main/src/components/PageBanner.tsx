@@ -10,7 +10,7 @@ interface PageBannerProps {
 
 export function PageBanner({ title, subtitle, imageSrc }: PageBannerProps) {
   return (
-    <div className="relative w-full h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+    <div className="relative w-full h-[40vh] sm:h-[45vh] md:h-[50vh] min-h-[280px] sm:min-h-[350px] md:min-h-[400px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
@@ -27,7 +27,7 @@ export function PageBanner({ title, subtitle, imageSrc }: PageBannerProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-4xl md:text-6xl font-bold mb-4 tracking-tight"
+          className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 tracking-tight"
         >
           {title}
         </motion.h1>
@@ -37,7 +37,7 @@ export function PageBanner({ title, subtitle, imageSrc }: PageBannerProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 max-w-2xl mx-auto px-4"
           >
             {subtitle}
           </motion.p>
@@ -46,3 +46,4 @@ export function PageBanner({ title, subtitle, imageSrc }: PageBannerProps) {
     </div>
   );
 }
+

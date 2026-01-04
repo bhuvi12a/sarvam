@@ -1,27 +1,29 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { usePathname } from "next/navigation";
 
 const outfit = Outfit({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Sarvam Builders & Realtors | Find Your Dream Home",
-  description: "Premium property listings and real estate services.",
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  const isAdminRoute = pathname?.startsWith('/admin');
+
   return (
     <html lang="en" className="scroll-smooth">
       <body className={outfit.className}>
-        <Navbar />
+        {!isAdminRoute && <Navbar />}
         {children}
-        <Footer />
+        {!isAdminRoute && <Footer />}
+        {!isAdminRoute && <WhatsAppButton />}
       </body>
     </html>
   );

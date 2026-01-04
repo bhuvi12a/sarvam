@@ -1,26 +1,40 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Menu, X, Home, ChevronDown, ChevronUp, Building2, Crown, Warehouse, Building } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
 const PROPERTY_TYPES = [
-    { title: "Apartments", href: "/property-types#apartments", icon: Building2 },
+    { title: "Plots", href: "/property-types#plots", icon: Building },
     { title: "Villas", href: "/property-types#villas", icon: Home },
-    { title: "Penthouses", href: "/property-types#penthouses", icon: Crown },
-    { title: "Townhouses", href: "/property-types#townhouses", icon: Warehouse },
-    { title: "Commercial", href: "/property-types#commercial", icon: Building },
+    { title: "Farmland", href: "/property-types#farmland", icon: Warehouse },
+    { title: "Apartments", href: "/property-types#apartments", icon: Building2 },
+    { title: "Commercials", href: "/property-types#commercials", icon: Crown },
 ];
 
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const lastScrollY = useRef(0);
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
+            const currentScrollY = window.scrollY;
+
+            // Show at top, hide on scroll down, show on scroll up
+            if (currentScrollY < 10) {
+                setIsVisible(true);
+            } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+                setIsVisible(false);  // Scrolling down past 100px
+            } else if (currentScrollY < lastScrollY.current) {
+                setIsVisible(true);   // Scrolling up
+            }
+
+            setScrolled(currentScrollY > 20);
+            lastScrollY.current = currentScrollY;
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
@@ -31,25 +45,20 @@ export function Navbar() {
             className={cn(
                 "fixed top-0 w-full z-50 transition-all duration-300 border-b",
                 scrolled
-                    ? "bg-white/95 dark:bg-black/95 backdrop-blur-md shadow-sm border-zinc-100 dark:border-zinc-800 py-3"
-                    : "bg-white/80 backdrop-blur-md py-5 border-transparent"
+                    ? "bg-white/95 dark:bg-black/95 backdrop-blur-md shadow-sm border-zinc-100 dark:border-zinc-800 py-2"
+                    : "bg-white/80 backdrop-blur-md py-3 border-transparent",
+                isVisible ? "translate-y-0" : "-translate-y-full"
             )}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-20">
-                    <div className="flex-shrink-0">
-                        <Link href="/" className="flex items-center gap-3 group">
-                            <div className="bg-primary/10 p-2.5 rounded-lg group-hover:bg-primary/20 transition-colors">
-                                <Home className="h-6 w-6 text-primary" />
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="font-bold text-xl tracking-tight text-secondary dark:text-white leading-none">
-                                    SARVAM
-                                </span>
-                                <span className="text-[0.65rem] uppercase tracking-widest text-secondary/60 dark:text-gray-400 font-bold ml-0.5">
-                                    BUILDER & REALTORS
-                                </span>
-                            </div>
+                <div className="flex items-center justify-between h-28 md:h-32">
+                    <div className="flex-shrink-0 h-full flex items-center">
+                        <Link href="/" className="h-full flex items-center group py-1">
+                            <img
+                                src="/logo.png"
+                                alt="Sarvam Builders & Realtors"
+                                className="h-full w-auto transition-transform group-hover:scale-105"
+                            />
                         </Link>
                     </div>
 

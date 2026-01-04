@@ -9,12 +9,11 @@ export function Footer() {
                     {/* Brand */}
                     <div className="flex flex-col items-start gap-4">
                         <Link href="/" className="flex items-center gap-2">
-                            <div className="bg-primary p-2 rounded-lg">
-                                <Home className="h-6 w-6 text-white" />
-                            </div>
-                            <span className="font-bold text-xl text-secondary dark:text-white">
-                                Sarvam Builders & Realtors
-                            </span>
+                            <img
+                                src="/logo.png"
+                                alt="Sarvam Builders & Realtors"
+                                className="h-16 md:h-20 w-auto"
+                            />
                         </Link>
                         <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed max-w-xs">
                             Redefining luxury living. We help you find properties that match your lifestyle and aspirations.
@@ -57,16 +56,19 @@ export function Footer() {
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3 text-zinc-500 dark:text-zinc-400 text-sm">
                                 <MapPin className="h-5 w-5 shrink-0" />
-                                <span>123 Luxury Lane, Beverly Hills, CA 90210</span>
+                                <span>Pattalamman Nagar, Rayakottai Road Hosur TamilNadu 635109</span>
                             </li>
                             <li className="flex items-center gap-3 text-zinc-500 dark:text-zinc-400 text-sm">
                                 <Phone className="h-5 w-5 shrink-0" />
-                                <span>+1 (555) 123-4567</span>
+                                <div>
+                                    <div>+91 9940066449 <span className="text-green-600 text-xs">(WhatsApp)</span></div>
+                                    <div>+91 6366229999</div>
+                                </div>
                             </li>
                         </ul>
                         <div className="flex items-center gap-3 text-secondary/80 dark:text-gray-400 mt-4">
                             <Mail className="h-5 w-5 text-primary" />
-                            <span>hello@sarvambuilders.com</span>
+                            <span>sarvambuilder07@gmail.com</span>
                         </div>
                     </div>
                 </div>
