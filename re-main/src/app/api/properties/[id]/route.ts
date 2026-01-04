@@ -19,10 +19,11 @@ interface Property {
 
 export async function GET(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const property = await findById<Property>('properties', params.id);
+        const { id } = await params;
+        const property = await findById<Property>('properties', id);
 
         if (!property) {
             return NextResponse.json({ error: 'Property not found' }, { status: 404 });
@@ -36,9 +37,10 @@ export async function GET(
 
 export async function PUT(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const body = await req.json();
 
         const updateFields = {
@@ -48,13 +50,13 @@ export async function PUT(
             sqft: body.sqft ? Number(body.sqft) : undefined,
         };
 
-        const success = await updateData('properties', params.id, updateFields);
+        const success = await updateData('properties', id, updateFields);
 
         if (!success) {
             return NextResponse.json({ error: 'Property not found' }, { status: 404 });
         }
 
-        const updated = await findById<Property>('properties', params.id);
+        const updated = await findById<Property>('properties', id);
         return NextResponse.json(updated);
     } catch (error) {
         return NextResponse.json({ error: 'Internal Error' }, { status: 500 });
@@ -63,10 +65,11 @@ export async function PUT(
 
 export async function DELETE(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const success = await deleteData('properties', params.id);
+        const { id } = await params;
+        const success = await deleteData('properties', id);
 
         if (!success) {
             return NextResponse.json({ error: 'Property not found' }, { status: 404 });

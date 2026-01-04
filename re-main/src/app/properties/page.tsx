@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { PageBanner } from "@/components/PageBanner";
 import { FeaturedListings } from "@/components/FeaturedListings";
@@ -19,7 +19,7 @@ interface Property {
     type: string;
 }
 
-export default function PropertiesPage() {
+function PropertiesContent() {
     const searchParams = useSearchParams();
     const [properties, setProperties] = useState<Property[]>([]);
     const [loading, setLoading] = useState(true);
@@ -216,3 +216,14 @@ export default function PropertiesPage() {
     );
 }
 
+export default function PropertiesPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+        }>
+            <PropertiesContent />
+        </Suspense>
+    );
+}
