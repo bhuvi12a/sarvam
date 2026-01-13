@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sarvam - Real Estate Platform
 
-## Getting Started
+A modern Next.js-based real estate platform with admin panel, property management, and contact features.
 
-First, run the development server:
+## 🚀 Quick Start
+
+### Local Development
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/bhuvi12a/sarvam.git
+   cd sarvam
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   - Copy `.env.example` to `.env.local`
+   - Update with your MongoDB connection string
+   ```bash
+   cp .env.example .env.local
+   ```
+
+4. **Run development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+   - Navigate to http://localhost:3000
+
+## 📦 Build & Deploy
+
+### Build Locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Deploy to Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> **⚠️ IMPORTANT: See [VERCEL_DEPLOYMENT_CHECKLIST.md](./VERCEL_DEPLOYMENT_CHECKLIST.md) for complete deployment instructions!**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Quick steps:
+1. Configure environment variables in Vercel dashboard
+2. Set Root Directory to `.` (not `re-main`)
+3. Deploy from GitHub
+4. Update environment variables with production URLs
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework**: Next.js 16.1.1 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Database**: MongoDB
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Deployment**: Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+sarvam/
+├── src/
+│   ├── app/              # Next.js app router pages
+│   │   ├── admin/        # Admin panel
+│   │   ├── api/          # API routes
+│   │   ├── about/        # About page
+│   │   ├── contact/      # Contact page
+│   │   ├── projects/     # Projects page
+│   │   ├── properties/   # Properties listing
+│   │   ├── services/     # Services page
+│   │   └── property-types/ # Property types page
+│   ├── components/       # Reusable components
+│   ├── lib/             # Utility functions
+│   └── data/            # Static data
+├── public/              # Static assets
+└── data/                # JSON data files
+```
 
-## Deploy on Vercel
+## 🔑 Environment Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Required environment variables (see `.env.example`):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `MONGODB_URI` - MongoDB connection string
+- `NEXT_PUBLIC_API_BASE_URL` - API base URL
+- `NEXT_PUBLIC_BASE_URL` - Application base URL
+
+## 📚 Documentation
+
+- [Vercel Deployment Checklist](./VERCEL_DEPLOYMENT_CHECKLIST.md) - Complete deployment guide
+- [Deployment Guide](./DEPLOYMENT_GUIDE.md) - Legacy deployment notes
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## 📄 License
+
+Private project - All rights reserved
