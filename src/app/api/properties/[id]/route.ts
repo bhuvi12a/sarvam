@@ -31,6 +31,7 @@ export async function GET(
 
         return NextResponse.json(property);
     } catch (error) {
+        console.error('Error fetching property by ID:', error);
         return NextResponse.json({ error: 'Internal Error' }, { status: 500 });
     }
 }
@@ -59,6 +60,7 @@ export async function PUT(
         const updated = await findById<Property>('properties', id);
         return NextResponse.json(updated);
     } catch (error) {
+        console.error('Error updating property:', error);
         return NextResponse.json({ error: 'Internal Error' }, { status: 500 });
     }
 }
@@ -77,6 +79,7 @@ export async function DELETE(
 
         return NextResponse.json({ message: 'Property deleted' });
     } catch (error) {
+        console.error('Error deleting property:', error);
         return NextResponse.json({ error: 'Internal Error' }, { status: 500 });
     }
 }
