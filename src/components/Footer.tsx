@@ -1,4 +1,4 @@
-import { Home, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Home, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Building2, TreePine, Building } from "lucide-react";
 import Link from "next/link";
 
 export function Footer() {
@@ -12,7 +12,7 @@ export function Footer() {
                             <img
                                 src="/logo.png"
                                 alt="Sarvam Builders & Realtors"
-                                className="h-16 md:h-20 w-auto"
+                                className="h-20 md:h-24 w-auto"
                             />
                         </Link>
                         <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed max-w-xs">
@@ -42,11 +42,11 @@ export function Footer() {
                     <div>
                         <h3 className="font-semibold text-gray-900 dark:text-white mb-6">Property Types</h3>
                         <ul className="space-y-3">
-                            <FooterLink href="#">Luxury Villas</FooterLink>
-                            <FooterLink href="#">Modern Apartments</FooterLink>
-                            <FooterLink href="#">PentHouses</FooterLink>
-                            <FooterLink href="#">Seaside Condos</FooterLink>
-                            <FooterLink href="#">Commercial</FooterLink>
+                            <PropertyTypeLink icon={Building2} href="#" title="Plots" description="Browse Plots" />
+                            <PropertyTypeLink icon={Home} href="#" title="Villas" description="Browse Villas" />
+                            <PropertyTypeLink icon={TreePine} href="#" title="Farmland" description="Browse Farmland" />
+                            <PropertyTypeLink icon={Building} href="#" title="Apartments" description="Browse Apartments" />
+                            <PropertyTypeLink icon={Building2} href="#" title="Commercials" description="Browse Commercials" />
                         </ul>
                     </div>
 
@@ -62,7 +62,6 @@ export function Footer() {
                                 <Phone className="h-5 w-5 shrink-0" />
                                 <div>
                                     <div>+91 9940066449 <span className="text-green-600 text-xs">(WhatsApp)</span></div>
-                                    <div>+91 6366229999</div>
                                 </div>
                             </li>
                         </ul>
@@ -100,3 +99,20 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
         </li>
     );
 }
+
+function PropertyTypeLink({ icon: Icon, href, title, description }: { icon: any; href: string; title: string; description: string }) {
+    return (
+        <li>
+            <Link href={href} className="flex items-center gap-3 p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors group">
+                <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-800 transition-colors">
+                    <Icon className="h-5 w-5" />
+                </div>
+                <div className="flex flex-col">
+                    <span className="text-sm font-medium text-gray-900 dark:text-white">{title}</span>
+                    <span className="text-xs text-zinc-500 dark:text-zinc-400">{description}</span>
+                </div>
+            </Link>
+        </li>
+    );
+}
+

@@ -1,1 +1,58 @@
-[]
+[
+    {
+        "id": "1",
+        "title": "Seaside Villa",
+        "description": "Beautiful villa with ocean view",
+        "address": "Mumbai",
+        "price": "2.5 Cr",
+        "type": "sale",
+        "beds": 4,
+        "baths": 3,
+        "sqft": 3500,
+        "imageUrl": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800",
+        "featured": true,
+        "createdAt": "2026-01-12T12:00:00.000Z"
+    },
+    {
+        "id": "2",
+        "title": "Downtown Apartment",
+        "description": "Spacious apartment in prime location",
+        "address": "Bangalore",
+        "price": "85 Lakhs",
+        "type": "sale",
+        "beds": 3,
+        "baths": 2,
+        "sqft": 1800,
+        "imageUrl": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
+        "featured": false,
+        "createdAt": "2026-01-08T14:00:00.000Z"
+    },
+    {
+        "id": "3",
+        "title": "Farmland Estate",
+        "description": "Expansive farmland perfect for agriculture",
+        "address": "Pune",
+        "price": "1.2 Cr",
+        "type": "sale",
+        "beds": 0,
+        "baths": 0,
+        "sqft": 50000,
+        "imageUrl": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800",
+        "featured": true,
+        "createdAt": "2026-01-03T09:00:00.000Z"
+    },
+    {
+        "id": "4",
+        "title": "Commercial Space",
+        "description": "Prime commercial property in business district",
+        "address": "Chennai",
+        "price": "3 Cr",
+        "type": "sale",
+        "beds": 0,
+        "baths": 2,
+        "sqft": 5000,
+        "imageUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800",
+        "featured": false,
+        "createdAt": "2026-01-01T11:00:00.000Z"
+    }
+]

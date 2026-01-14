@@ -82,7 +82,6 @@ export default function ContactPage() {
                                     <div>
                                         <h3 className="font-semibold text-gray-900 mb-1">Call Us</h3>
                                         <p className="text-gray-600">+91 9940066449 <span className="text-sm text-green-600">(WhatsApp)</span></p>
-                                        <p className="text-gray-600">+91 6366229999</p>
                                         <p className="text-sm text-gray-500 mt-1">Mon-Sat from 9am to 7pm</p>
                                     </div>
                                 </div>
@@ -126,7 +125,7 @@ export default function ContactPage() {
                                                 value={formData.name}
                                                 onChange={handleChange}
                                                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                                                placeholder="John"
+                                                placeholder="Enter your name"
                                                 required
                                             />
                                         </div>
@@ -137,7 +136,7 @@ export default function ContactPage() {
                                                 value={formData.phone}
                                                 onChange={handleChange}
                                                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                                                placeholder="+1 (555) 000-0000"
+                                                placeholder="Enter your phone number"
                                             />
                                         </div>
                                     </div>
@@ -149,7 +148,7 @@ export default function ContactPage() {
                                             value={formData.email}
                                             onChange={handleChange}
                                             className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                                            placeholder="john@example.com"
+                                            placeholder="Enter your email address"
                                             required
                                         />
                                     </div>

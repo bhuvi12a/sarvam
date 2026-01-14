@@ -1,1 +1,32 @@
-[]
+[
+    {
+        "id": "1",
+        "title": "Luxury Villa Project",
+        "description": "Premium villa development with modern amenities",
+        "location": "Bangalore",
+        "status": "ongoing",
+        "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+        "featured": true,
+        "createdAt": "2026-01-14T15:00:00.000Z"
+    },
+    {
+        "id": "2",
+        "title": "Smart City Apartments",
+        "description": "Modern apartments in the heart of the city",
+        "location": "Chennai",
+        "status": "completed",
+        "imageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
+        "featured": false,
+        "createdAt": "2026-01-10T10:00:00.000Z"
+    },
+    {
+        "id": "3",
+        "title": "Green Valley Plots",
+        "description": "Residential plots surrounded by nature",
+        "location": "Coimbatore",
+        "status": "planning",
+        "imageUrl": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800",
+        "featured": true,
+        "createdAt": "2026-01-05T08:00:00.000Z"
+    }
+]

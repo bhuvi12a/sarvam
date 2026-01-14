@@ -204,12 +204,12 @@ export function Navbar() {
         <header
             ref={navRef}
             className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-200/50'
-                    : 'bg-white border-b border-gray-200/30'
+                ? 'bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-200/50'
+                : 'bg-white border-b border-gray-200/30'
                 }`}
         >
             <div className="container mx-auto px-4 sm:px-6">
-                <nav className="flex items-center justify-between h-28 md:h-32">
+                <nav className="flex items-center justify-between h-32 md:h-36">
                     {/* Desktop Logo - Hidden on mobile */}
                     <div className="hidden xl:block h-full">
                         <DesktopLogo />
@@ -237,8 +237,8 @@ export function Navbar() {
                                     <>
                                         <button
                                             className={`flex items-center space-x-2 px-4 py-2.5 rounded-lg transition-all duration-200 ${pathname.startsWith(item.href)
-                                                    ? 'text-primary bg-primary/10'
-                                                    : 'text-secondary/70 hover:text-primary hover:bg-primary/5'
+                                                ? 'text-primary bg-primary/10'
+                                                : 'text-secondary/70 hover:text-primary hover:bg-primary/5'
                                                 }`}
                                         >
                                             <span className="font-medium">{item.label}</span>
@@ -267,16 +267,16 @@ export function Navbar() {
                                                                 onClick={() => setOpenDropdown(null)}
                                                             >
                                                                 <div className={`p-2 rounded-lg mr-3 transition-all duration-200 ${pathname === subItem.href
-                                                                        ? 'bg-primary/20 text-primary'
-                                                                        : 'bg-gray-100 text-gray-600 group-hover:bg-primary/20 group-hover:text-primary'
+                                                                    ? 'bg-primary/20 text-primary'
+                                                                    : 'bg-gray-100 text-gray-600 group-hover:bg-primary/20 group-hover:text-primary'
                                                                     }`}>
                                                                     {subItem.icon}
                                                                 </div>
                                                                 <div className="flex-1">
                                                                     <div className="flex items-center justify-between">
                                                                         <span className={`font-medium transition-colors duration-200 ${pathname === subItem.href
-                                                                                ? 'text-primary'
-                                                                                : 'text-gray-800 group-hover:text-primary'
+                                                                            ? 'text-primary'
+                                                                            : 'text-gray-800 group-hover:text-primary'
                                                                             }`}>
                                                                             {subItem.label}
                                                                         </span>
@@ -297,8 +297,8 @@ export function Navbar() {
                                     <Link
                                         href={item.href}
                                         className={`flex items-center space-x-2 px-4 py-2.5 rounded-lg transition-all duration-200 ${pathname === item.href
-                                                ? 'text-primary bg-primary/10'
-                                                : 'text-secondary/70 hover:text-primary hover:bg-primary/5'
+                                            ? 'text-primary bg-primary/10'
+                                            : 'text-secondary/70 hover:text-primary hover:bg-primary/5'
                                             }`}
                                     >
                                         <span className="font-medium">{item.label}</span>
@@ -393,8 +393,8 @@ export function Navbar() {
                                                     <button
                                                         onClick={() => toggleMobileDropdown(item.label)}
                                                         className={`flex items-center justify-between w-full py-5 px-6 transition-all duration-300 group hover:bg-primary/5 ${pathname.startsWith(item.href)
-                                                                ? 'text-primary bg-primary/10'
-                                                                : 'hover:text-primary'
+                                                            ? 'text-primary bg-primary/10'
+                                                            : 'hover:text-primary'
                                                             }`}
                                                     >
                                                         <span className="font-semibold text-gray-800">{item.label}</span>
@@ -407,8 +407,8 @@ export function Navbar() {
                                                         href={item.href}
                                                         onClick={closeMenu}
                                                         className={`flex items-center py-5 px-6 transition-all duration-300 group hover:bg-primary/5 ${pathname === item.href
-                                                                ? 'text-primary bg-primary/10'
-                                                                : 'hover:text-primary'
+                                                            ? 'text-primary bg-primary/10'
+                                                            : 'hover:text-primary'
                                                             }`}
                                                     >
                                                         <span className="font-semibold text-gray-800">{item.label}</span>
@@ -454,13 +454,13 @@ export function Navbar() {
                                                             href={subItem.href}
                                                             onClick={closeMenu}
                                                             className={`flex items-start p-4 rounded-lg transition-all duration-300 border ${pathname === subItem.href
-                                                                    ? 'bg-primary/10 text-primary border-primary/20 shadow-sm'
-                                                                    : 'hover:bg-primary/5 text-gray-900 hover:text-primary border-gray-100 hover:border-primary/20'
+                                                                ? 'bg-primary/10 text-primary border-primary/20 shadow-sm'
+                                                                : 'hover:bg-primary/5 text-gray-900 hover:text-primary border-gray-100 hover:border-primary/20'
                                                                 }`}
                                                         >
                                                             <div className={`p-2 rounded-lg mr-3 transition-all duration-200 ${pathname === subItem.href
-                                                                    ? 'bg-primary/20 text-primary'
-                                                                    : 'bg-gray-100 text-gray-600 hover:bg-primary/20 hover:text-primary'
+                                                                ? 'bg-primary/20 text-primary'
+                                                                : 'bg-gray-100 text-gray-600 hover:bg-primary/20 hover:text-primary'
                                                                 }`}>
                                                                 {subItem.icon}
                                                             </div>

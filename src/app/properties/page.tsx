@@ -54,10 +54,17 @@ function PropertiesContent() {
             // Search query filter (matches title, address, or type)
             if (searchQuery) {
                 const query = searchQuery.toLowerCase();
+                const title = (property.title || '').toLowerCase();
+                const address = (property.address || '').toLowerCase();
+                const type = (property.type || '').toLowerCase();
+
+                // Check for exact match on address (for location dropdown)
+                // or partial match on any field (for text search)
                 const matchesSearch =
-                    property.title.toLowerCase().includes(query) ||
-                    property.address.toLowerCase().includes(query) ||
-                    property.type.toLowerCase().includes(query);
+                    address === query || // Exact location match
+                    title.includes(query) ||
+                    address.includes(query) ||
+                    type.includes(query);
                 if (!matchesSearch) return false;
             }
 

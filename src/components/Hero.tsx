@@ -1,29 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Search } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function Hero() {
     const router = useRouter();
-    const [searchQuery, setSearchQuery] = useState("");
+    const [location, setLocation] = useState("");
     const [propertyType, setPropertyType] = useState("");
     const [priceRange, setPriceRange] = useState("");
+    const [availableLocations, setAvailableLocations] = useState<string[]>([]);
+
+    // Fetch unique locations from properties and projects
+    useEffect(() => {
+        const fetchLocations = async () => {
+            try {
+                const [propertiesRes, projectsRes] = await Promise.all([
+                    fetch('/api/properties'),
+                    fetch('/api/projects')
+                ]);
+
+                const properties = await propertiesRes.json();
+                const projects = await projectsRes.json();
+
+                // Extract unique locations
+                const locationSet = new Set<string>();
+
+                // Properties use 'address' field
+                properties.forEach((item: any) => {
+                    if (item.address && item.address.trim()) {
+                        locationSet.add(item.address.trim());
+                    }
+                });
+
+                // Projects use 'location' field
+                projects.forEach((item: any) => {
+                    if (item.location && item.location.trim()) {
+                        locationSet.add(item.location.trim());
+                    }
+                });
+
+                // Sort locations alphabetically
+                const sortedLocations = Array.from(locationSet).sort();
+                setAvailableLocations(sortedLocations);
+            } catch (error) {
+                console.error('Failed to fetch locations:', error);
+            }
+        };
+
+        fetchLocations();
+    }, []);
 
     const handleSearch = () => {
         const params = new URLSearchParams();
-        if (searchQuery) params.set("q", searchQuery);
+        if (location) params.set("q", location);
         if (propertyType) params.set("type", propertyType);
         if (priceRange) params.set("price", priceRange);
 
         router.push(`/properties?${params.toString()}`);
-    };
-
-    const handleKeyPress = (e: React.KeyboardEvent) => {
-        if (e.key === "Enter") {
-            handleSearch();
-        }
     };
 
     return (
@@ -65,15 +100,19 @@ export function Hero() {
                     className="bg-white/95 backdrop-blur-sm p-2 sm:p-3 rounded-xl sm:rounded-2xl max-w-3xl mx-auto shadow-2xl flex flex-col md:flex-row gap-2"
                 >
                     <div className="flex-1 flex items-center px-3 sm:px-4 md:border-r border-gray-200">
-                        <Search className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 mr-2 shrink-0" />
-                        <input
-                            type="text"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            onKeyPress={handleKeyPress}
-                            placeholder="Search by Location..."
-                            className="w-full bg-transparent border-none focus:ring-0 text-gray-800 placeholder-gray-400 h-10 sm:h-12 text-sm sm:text-base outline-none"
-                        />
+                        <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 mr-2 shrink-0" />
+                        <select
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                            className="w-full bg-transparent border-none focus:ring-0 text-gray-800 h-10 sm:h-12 px-0 text-sm sm:text-base outline-none cursor-pointer"
+                        >
+                            <option value="">Select Location</option>
+                            {availableLocations.map((loc) => (
+                                <option key={loc} value={loc}>
+                                    {loc}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div className="flex-1 flex items-center">
                         <select
