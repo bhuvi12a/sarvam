@@ -4,13 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:ssl": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.26",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.562.0",
     "mongodb": "^7.0.0",
     "next": "16.1.1",
@@ -21,6 +25,8 @@
     "zod": "^4.3.5"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

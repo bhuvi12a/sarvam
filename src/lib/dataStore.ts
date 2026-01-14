@@ -7,14 +7,46 @@ let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
 if (!global._mongoClientPromise) {
-    client = new MongoClient(uri);
-    global._mongoClientPromise = client.connect();
+    // Configure MongoDB client with SSL bypass for development
+    const options: any = {
+        // Add retry logic
+        retryWrites: true,
+        retryReads: true,
+        // Connection timeouts
+        serverSelectionTimeoutMS: 5000,  // 5 seconds
+        connectTimeoutMS: 10000,          // 10 seconds
+        socketTimeoutMS: 45000,           // 45 seconds
+    };
+
+    // SSL/TLS configuration to fix SSL errors
+    // For development, we bypass certificate validation
+    if (process.env.NODE_ENV !== 'production') {
+        options.tlsAllowInvalidCertificates = true;
+        options.tlsAllowInvalidHostnames = true;
+    }
+
+    try {
+        client = new MongoClient(uri, options);
+        global._mongoClientPromise = client.connect().catch((error) => {
+            console.error('Failed to connect to MongoDB:', error.message);
+            // Return a rejected promise so the error can be caught by consumers
+            return Promise.reject(error);
+        });
+    } catch (error) {
+        console.error('Error creating MongoDB client:', error);
+        throw error;
+    }
 }
 clientPromise = global._mongoClientPromise;
 
 export async function getDb() {
-    const client = await clientPromise;
-    return client.db(dbName);
+    try {
+        const client = await clientPromise;
+        return client.db(dbName);
+    } catch (error) {
+        console.error('MongoDB connection error:', error);
+        throw error;
+    }
 }
 
 export async function readData<T>(collectionName: string): Promise<T[]> {
