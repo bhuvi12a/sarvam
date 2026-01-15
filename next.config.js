@@ -2,6 +2,15 @@
 const nextConfig = {
     // Empty turbopack config to silence the warning
     turbopack: {},
+    // Image configuration for external domains
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'images.unsplash.com',
+            },
+        ],
+    },
     // Webpack configuration to handle SSL/TLS issues
     webpack: (config, { isServer }) => {
         if (isServer) {

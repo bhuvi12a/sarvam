@@ -1,32 +1,57 @@
 [
     {
         "id": "1",
-        "title": "Luxury Villa Project",
-        "description": "Premium villa development with modern amenities",
-        "location": "Bangalore",
+        "title": "2BHK Individual Villas",
+        "description": "Individual villas starting from 65 lakhs in Karapalli",
+        "location": "Karapalli, Hosur",
         "status": "ongoing",
+        "price": "₹65 Lakhs",
         "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
         "featured": true,
-        "createdAt": "2026-01-14T15:00:00.000Z"
+        "createdAt": "2026-01-15T09:00:00.000Z"
     },
     {
         "id": "2",
-        "title": "Smart City Apartments",
-        "description": "Modern apartments in the heart of the city",
-        "location": "Chennai",
-        "status": "completed",
+        "title": "2BHK Luxury Villas",
+        "description": "Luxury villas starting from 75 lakhs in Karapalli",
+        "location": "Karapalli, Hosur",
+        "status": "ongoing",
+        "price": "₹75 Lakhs",
         "imageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
-        "featured": false,
-        "createdAt": "2026-01-10T10:00:00.000Z"
+        "featured": true,
+        "createdAt": "2026-01-15T09:00:00.000Z"
     },
     {
         "id": "3",
-        "title": "Green Valley Plots",
-        "description": "Residential plots surrounded by nature",
-        "location": "Coimbatore",
-        "status": "planning",
+        "title": "3BHK Luxury Villas",
+        "description": "Luxury villas starting from 84.99 lakhs in Karapalli",
+        "location": "Karapalli, Hosur",
+        "status": "ongoing",
+        "price": "₹84.99 Lakhs",
         "imageUrl": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800",
         "featured": true,
-        "createdAt": "2026-01-05T08:00:00.000Z"
+        "createdAt": "2026-01-15T09:00:00.000Z"
+    },
+    {
+        "id": "4",
+        "title": "3BHK Modern Luxury Villas",
+        "description": "Modern luxury villas starting from 90.9 lakhs in Karapalli",
+        "location": "Karapalli, Hosur",
+        "status": "ongoing",
+        "price": "₹90.9 Lakhs",
+        "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+        "featured": true,
+        "createdAt": "2026-01-15T09:00:00.000Z"
+    },
+    {
+        "id": "5",
+        "title": "4BHK Modern Luxury Villas",
+        "description": "Modern luxury villas starting from 99.99 lakhs in Karapalli",
+        "location": "Karapalli, Hosur",
+        "status": "ongoing",
+        "price": "₹99.99 Lakhs",
+        "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+        "featured": true,
+        "createdAt": "2026-01-15T09:00:00.000Z"
     }
 ]

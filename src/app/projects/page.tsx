@@ -12,6 +12,7 @@ interface Project {
     location: string;
     status: string;
     imageUrl: string;
+    price?: string;
 }
 
 export default function ProjectsPage() {
@@ -66,7 +67,14 @@ export default function ProjectsPage() {
                                     </div>
                                     <div className="p-8">
                                         <div className="flex justify-between items-start mb-4">
-                                            <h3 className="text-2xl font-bold text-gray-900">{project.title}</h3>
+                                            <div>
+                                                <h3 className="text-2xl font-bold text-gray-900">{project.title}</h3>
+                                                {project.price && (
+                                                    <p className="text-xl font-bold text-primary mt-2">
+                                                        Starting from {project.price}
+                                                    </p>
+                                                )}
+                                            </div>
                                             <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">{project.location}</span>
                                         </div>
                                         <p className="text-gray-600 mb-6 leading-relaxed">

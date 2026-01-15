@@ -19,7 +19,22 @@ interface Property {
 
 export async function GET() {
     try {
-        const properties = await readData<Property>('properties');
+        let properties = await readData<Property>('properties');
+
+        // Fallback to mockData if MongoDB is empty
+        if (!properties || properties.length === 0) {
+            try {
+                const mockData = await import('@/data/mockData');
+                properties = mockData.PROPERTIES.map((prop: any) => ({
+                    ...prop,
+                    featured: true,
+                    createdAt: new Date().toISOString(),
+                }));
+            } catch (error) {
+                console.error('Failed to load mockData:', error);
+            }
+        }
+
         return NextResponse.json(properties);
     } catch (error) {
         return NextResponse.json({ error: 'Failed to fetch properties' }, { status: 500 });

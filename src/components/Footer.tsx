@@ -28,7 +28,7 @@ export function Footer() {
 
                     {/* Quick Links */}
                     <div>
-                        <h3 className="font-semibold text-gray-900 dark:text-white mb-6">Quick Links</h3>
+                        <h3 className="font-semibold text-gray-800 dark:text-white mb-6">Quick Links</h3>
                         <ul className="space-y-3">
                             <FooterLink href="/">Home</FooterLink>
                             <FooterLink href="#listings">Properties</FooterLink>
@@ -40,7 +40,7 @@ export function Footer() {
 
                     {/* Properties */}
                     <div>
-                        <h3 className="font-semibold text-gray-900 dark:text-white mb-6">Property Types</h3>
+                        <h3 className="font-semibold text-gray-800 dark:text-white mb-6">Property Types</h3>
                         <ul className="space-y-3">
                             <PropertyTypeLink icon={Building2} href="#" title="Plots" description="Browse Plots" />
                             <PropertyTypeLink icon={Home} href="#" title="Villas" description="Browse Villas" />
@@ -52,7 +52,7 @@ export function Footer() {
 
                     {/* Contact */}
                     <div>
-                        <h3 className="font-semibold text-gray-900 dark:text-white mb-6">Contact Us</h3>
+                        <h3 className="font-semibold text-gray-800 dark:text-white mb-6">Contact Us</h3>
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3 text-zinc-500 dark:text-zinc-400 text-sm">
                                 <MapPin className="h-5 w-5 shrink-0" />
@@ -65,14 +65,14 @@ export function Footer() {
                                 </div>
                             </li>
                         </ul>
-                        <div className="flex items-center gap-3 text-secondary/80 dark:text-gray-400 mt-4">
+                        <div className="flex items-center gap-3 text-zinc-600 dark:text-zinc-300 mt-4">
                             <Mail className="h-5 w-5 text-primary" />
                             <span>sarvambuilder07@gmail.com</span>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-zinc-100 dark:border-zinc-800 text-center text-sm text-secondary/60 dark:text-gray-500">
+                <div className="mt-12 pt-8 border-t border-zinc-100 dark:border-zinc-800 text-center text-sm text-zinc-500 dark:text-zinc-400">
                     <p>
                         &copy; {new Date().getFullYear()} Sarvam Builders & Realtors. All rights reserved.
                     </p>
@@ -108,7 +108,7 @@ function PropertyTypeLink({ icon: Icon, href, title, description }: { icon: any;
                     <Icon className="h-5 w-5" />
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-sm font-medium text-gray-900 dark:text-white">{title}</span>
+                    <span className="text-sm font-medium text-gray-800 dark:text-white">{title}</span>
                     <span className="text-xs text-zinc-500 dark:text-zinc-400">{description}</span>
                 </div>
             </Link>

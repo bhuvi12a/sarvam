@@ -9,7 +9,6 @@ export function Hero() {
     const router = useRouter();
     const [location, setLocation] = useState("");
     const [propertyType, setPropertyType] = useState("");
-    const [priceRange, setPriceRange] = useState("");
     const [availableLocations, setAvailableLocations] = useState<string[]>([]);
 
     // Fetch unique locations from properties and projects
@@ -56,7 +55,6 @@ export function Hero() {
         const params = new URLSearchParams();
         if (location) params.set("q", location);
         if (propertyType) params.set("type", propertyType);
-        if (priceRange) params.set("price", priceRange);
 
         router.push(`/properties?${params.toString()}`);
     };
@@ -114,11 +112,11 @@ export function Hero() {
                             ))}
                         </select>
                     </div>
-                    <div className="flex-1 flex items-center">
+                    <div className="flex-1 flex items-center px-3 sm:px-4 md:border-r border-gray-200">
                         <select
                             value={propertyType}
                             onChange={(e) => setPropertyType(e.target.value)}
-                            className="w-full bg-transparent border-none focus:ring-0 text-gray-800 h-10 sm:h-12 px-3 sm:px-4 text-sm sm:text-base outline-none cursor-pointer"
+                            className="w-full bg-transparent border-none focus:ring-0 text-gray-800 h-10 sm:h-12 px-0 text-sm sm:text-base outline-none cursor-pointer"
                         >
                             <option value="">Property Type</option>
                             <option value="plots">Plots</option>
@@ -126,19 +124,6 @@ export function Hero() {
                             <option value="farmland">Farmland</option>
                             <option value="apartments">Apartments</option>
                             <option value="commercials">Commercials</option>
-                        </select>
-                    </div>
-                    <div className="flex-1 flex items-center">
-                        <select
-                            value={priceRange}
-                            onChange={(e) => setPriceRange(e.target.value)}
-                            className="w-full bg-transparent border-none focus:ring-0 text-gray-800 h-10 sm:h-12 px-3 sm:px-4 text-sm sm:text-base outline-none cursor-pointer"
-                        >
-                            <option value="">Price Range</option>
-                            <option value="0-25L">₹0 - ₹25 Lakhs</option>
-                            <option value="25L-50L">₹25 - ₹50 Lakhs</option>
-                            <option value="50L-1Cr">₹50L - ₹1 Cr</option>
-                            <option value="1Cr+">₹1 Cr+</option>
                         </select>
                     </div>
                     <button
