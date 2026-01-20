@@ -1,6 +1,26 @@
 import { Landmark, Hammer, Droplets, Sofa, PenTool } from "lucide-react";
+import { Metadata } from "next";
 
 import { PageBanner } from "@/components/PageBanner";
+
+export const metadata: Metadata = {
+    title: "Our Services",
+    description: "Comprehensive real estate services including property sales, home loans, construction, borewell installation, interior design, and architecture. Complete solutions for all your property needs.",
+    keywords: [
+        "real estate services",
+        "property services",
+        "home loan assistance",
+        "construction services",
+        "interior design",
+        "architecture services",
+        "borewell installation",
+        "property development services",
+    ],
+    openGraph: {
+        title: "Real Estate Services - Sarvam",
+        description: "Complete real estate solutions including property sales, home loans, construction, and interior design services.",
+    },
+};
 
 export default function ServicesPage() {
     const services = [

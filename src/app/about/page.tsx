@@ -1,7 +1,18 @@
 import { AboutSection } from "@/components/AboutSection";
 import Image from "next/image";
+import { Metadata } from "next";
 
 import { PageBanner } from "@/components/PageBanner";
+
+export const metadata: Metadata = {
+    title: "About Us",
+    description: "Learn about Sarvam Real Estate - your trusted partner in finding the perfect property. We specialize in residential, commercial, and land sales with expert guidance and personalized service.",
+    keywords: ["about sarvam real estate", "real estate company", "property experts", "trusted real estate agent"],
+    openGraph: {
+        title: "About Sarvam Real Estate",
+        description: "Your trusted partner in real estate - helping you find the perfect property with expert guidance.",
+    },
+};
 
 export default function AboutPage() {
     return (

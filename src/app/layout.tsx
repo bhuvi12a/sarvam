@@ -8,25 +8,42 @@ const outfit = Outfit({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
   title: {
-    default: 'Sarvam - Premier Construction & Real Estate Company',
-    template: '%s | Sarvam Construction',
+    default: 'Sarvam - Premier Real Estate & Property Solutions',
+    template: '%s | Sarvam Real Estate',
   },
-  description: 'Sarvam is a leading construction and real estate company specializing in residential, commercial, and infrastructure projects. Quality construction services with innovative designs.',
+  description: 'Sarvam is a leading real estate company in Hosur specializing in villas, residential properties, commercial spaces, and land sales. Find your dream 2 BHK or 3 BHK villa in Hosur with expert guidance and trusted service.',
   keywords: [
-    'construction company',
     'real estate',
-    'residential construction',
-    'commercial construction',
-    'infrastructure projects',
-    'building contractors',
+    'property for sale',
+    'residential properties',
+    'commercial properties',
+    'land for sale',
     'property development',
-    'sarvam construction',
-    'construction services',
-    'quality construction',
+    'real estate agent',
+    'property listings',
+    'buy property',
+    'sell property',
+    'property investment',
+    'real estate services',
+    'property management',
+    'sarvam real estate',
+    'house for sale',
+    'apartments for sale',
+    'plots for sale',
+    'real estate solutions',
+    // Location-specific keywords - Hosur
+    'villas in hosur',
+    '2 bhk villas in hosur',
+    '3 bhk villas in hosur',
+    'villas near hosur',
+    'hosur real estate',
+    'properties in hosur',
+    'hosur villas for sale',
+    'residential villas hosur',
   ],
-  authors: [{ name: 'Sarvam' }],
-  creator: 'Sarvam',
-  publisher: 'Sarvam',
+  authors: [{ name: 'Sarvam Real Estate' }],
+  creator: 'Sarvam Real Estate',
+  publisher: 'Sarvam Real Estate',
   formatDetection: {
     email: false,
     address: false,
@@ -36,22 +53,22 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: '/',
-    title: 'Sarvam - Premier Construction & Real Estate Company',
-    description: 'Leading construction and real estate company specializing in residential, commercial, and infrastructure projects.',
-    siteName: 'Sarvam Construction',
+    title: 'Sarvam - Premier Real Estate & Property Solutions',
+    description: 'Leading real estate company specializing in residential properties, commercial spaces, land sales, and property development. Find your dream property with us.',
+    siteName: 'Sarvam Real Estate',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Sarvam Construction',
+        alt: 'Sarvam Real Estate',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sarvam - Premier Construction & Real Estate Company',
-    description: 'Leading construction and real estate company specializing in residential, commercial, and infrastructure projects.',
+    title: 'Sarvam - Premier Real Estate & Property Solutions',
+    description: 'Leading real estate company specializing in residential properties, commercial spaces, land sales, and property development.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -66,14 +83,14 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: '3BI3KFpSsh3AybnBQy_B5uTLw-AE6FxV-S77f8FHypU',
     // yandex: 'your-yandex-verification-code',
     // bing: 'your-bing-verification-code',
   },
   alternates: {
     canonical: '/',
   },
-  category: 'construction',
+  category: 'real estate',
 };
 
 export const viewport: Viewport = {
@@ -104,17 +121,17 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* Structured Data - Organization */}
+        {/* Structured Data - Real Estate Organization */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: 'Sarvam Construction',
+              '@type': 'RealEstateAgent',
+              name: 'Sarvam Real Estate',
               url: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
               logo: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/logo.png`,
-              description: 'Leading construction and real estate company',
+              description: 'Leading real estate company specializing in residential properties, commercial spaces, land sales, and property development',
               address: {
                 '@type': 'PostalAddress',
                 addressCountry: 'IN',
