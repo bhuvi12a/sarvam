@@ -6,7 +6,10 @@ import { ClientLayout } from "@/components/ClientLayout";
 const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL ||
+    (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')
+  ),
   title: {
     default: 'Sarvam - Premier Real Estate & Property Solutions',
     template: '%s | Sarvam Real Estate',
@@ -27,12 +30,17 @@ export const metadata: Metadata = {
     'real estate services',
     'property management',
     'sarvam real estate',
+    'sarvam builders',
+    'sarvam realtors',
     'house for sale',
     'apartments for sale',
     'plots for sale',
+    'independent house for sale',
+    'gated community plots',
     'real estate solutions',
-    // Location-specific keywords - Hosur
+    // Location-specific keywords - Hosur & Krishnagiri
     'villas in hosur',
+    'luxury villas hosur',
     '2 bhk villas in hosur',
     '3 bhk villas in hosur',
     'villas near hosur',
@@ -40,6 +48,30 @@ export const metadata: Metadata = {
     'properties in hosur',
     'hosur villas for sale',
     'residential villas hosur',
+    'land for sale in hosur',
+    'plots for sale in hosur',
+    'sites for sale in hosur',
+    'commercial land hosur',
+    'real estate agents in hosur',
+    'property developers hosur',
+    'sarvam real estate hosur',
+    'real estate companies in hosur',
+    'krishnagiri real estate',
+    'plots in krishnagiri',
+    'rayakottai road properties',
+    // High-intent "Best" keywords
+    'best plots in hosur',
+    'best plots in krishnagiri',
+    'best villas in hosur',
+    'best villas in karapalli',
+    'best plots in karapalli',
+    'properties in karapalli',
+    // Agency ranking keywords
+    'best real estate agency in hosur',
+    'top real estate agency in hosur',
+    'best real estate company in hosur',
+    'top builders in hosur',
+    'best realtors in hosur',
   ],
   authors: [{ name: 'Sarvam Real Estate' }],
   creator: 'Sarvam Real Estate',
@@ -91,6 +123,12 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   category: 'real estate',
+  other: {
+    'geo.region': 'IN-TN',
+    'geo.placename': 'Hosur',
+    'geo.position': '12.7409;77.8253',
+    'ICBM': '12.7409, 77.8253',
+  },
 };
 
 export const viewport: Viewport = {
@@ -122,6 +160,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
         {/* Structured Data - Real Estate Organization */}
+        {/* Structured Data - Real Estate Organization */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -129,18 +168,66 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'RealEstateAgent',
               name: 'Sarvam Real Estate',
-              url: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
-              logo: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/logo.png`,
-              description: 'Leading real estate company specializing in residential properties, commercial spaces, land sales, and property development',
+              image: [
+                `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/logo.png`,
+                `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/og-image.jpg`
+              ],
+              url: process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000'),
+              logo: `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/logo.png`,
+              description: 'Leading real estate company in Hosur specializing in villas, residential properties, commercial spaces, and land sales.',
+              telephone: '+919940066449',
+              email: 'sarvambuilder07@gmail.com',
               address: {
                 '@type': 'PostalAddress',
-                addressCountry: 'IN',
+                streetAddress: 'Pattalamman Nagar, Rayakottai Road',
+                addressLocality: 'Hosur',
+                addressRegion: 'Tamil Nadu',
+                postalCode: '635109',
+                addressCountry: 'IN'
               },
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: 12.7409,
+                longitude: 77.8253
+              },
+              areaServed: [
+                {
+                  '@type': 'City',
+                  name: 'Hosur'
+                },
+                {
+                  '@type': 'City',
+                  name: 'Krishnagiri'
+                },
+                {
+                  '@type': 'City',
+                  name: 'Karapalli'
+                },
+                {
+                  '@type': 'City',
+                  name: 'Bangalore'
+                }
+              ],
+              priceRange: '₹5 Lakhs - ₹5 Crores',
+              openingHoursSpecification: [
+                {
+                  '@type': 'OpeningHoursSpecification',
+                  dayOfWeek: [
+                    'Monday',
+                    'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday',
+                    'Saturday',
+                    'Sunday'
+                  ],
+                  opens: '09:00',
+                  closes: '21:00'
+                }
+              ],
               sameAs: [
-                // Add your social media URLs here
                 // 'https://facebook.com/sarvam',
-                // 'https://twitter.com/sarvam',
-                // 'https://linkedin.com/company/sarvam',
+                // 'https://instagram.com/sarvam'
               ],
             }),
           }}

@@ -1,7 +1,7 @@
 import { Building2, FolderKanban, MessageSquare } from "lucide-react";
 
 async function getStats() {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000');
 
     try {
         const [propertiesRes, projectsRes, inquiriesRes] = await Promise.all([

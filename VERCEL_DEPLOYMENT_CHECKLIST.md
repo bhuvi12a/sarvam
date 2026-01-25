@@ -29,13 +29,13 @@
 | Variable Name | Value | Environment |
 |--------------|-------|-------------|
 | `MONGODB_URI` | `mongodb+srv://bhuvaneshb2002b_db_user:Sarvam%40123@sarvam.c3miriq.mongodb.net/sarvam_db` | Production, Preview, Development |
-| `NEXT_PUBLIC_API_BASE_URL` | `https://YOUR-VERCEL-URL.vercel.app/api` | Production |
-| `NEXT_PUBLIC_BASE_URL` | `https://YOUR-VERCEL-URL.vercel.app` | Production |
+| `NEXT_PUBLIC_API_BASE_URL` | `https://sarvambuilders.com/api` | Production |
+| `NEXT_PUBLIC_BASE_URL` | `https://sarvambuilders.com` | Production |
 
 > [!WARNING]
-> **Replace `YOUR-VERCEL-URL` with your actual Vercel deployment URL!**
+> **Ensure `NEXT_PUBLIC_BASE_URL` is set to `https://sarvambuilders.com`!**
 > 
-> After your first deployment, Vercel will give you a URL like `your-project-name.vercel.app`. Update these environment variables with the correct URL.
+> After your first deployment, update your environment variables if they were set to anything else.
 
 #### For Preview and Development Environments:
 

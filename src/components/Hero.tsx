@@ -79,7 +79,7 @@ export function Hero() {
                     transition={{ duration: 0.6, ease: "easeOut" }}
                     className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-4 sm:mb-6"
                 >
-                    Find Your Perfect <span className="text-primary">Sanctuary</span>
+                    Best Real Estate Agency in <span className="text-primary">Hosur</span>
                 </motion.h1>
 
                 <motion.p
@@ -88,7 +88,7 @@ export function Hero() {
                     transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
                     className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 mb-6 sm:mb-10 max-w-2xl mx-auto px-4"
                 >
-                    Connect with the most exclusive properties in the world's most desired locations.
+                    Explore the best villas, plots, and commercial lands in Hosur & Krishnagiri. Your trusted partner for real estate excellence.
                 </motion.p>
 
                 <motion.div
