@@ -53,5 +53,16 @@
         "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
         "featured": true,
         "createdAt": "2026-01-15T09:00:00.000Z"
+    },
+    {
+        "id": "6",
+        "title": "Nexus Villas",
+        "description": "Premium gated community villas offering a perfect blend of modern architecture and nature, with world-class amenities in the heart of Hosur.",
+        "location": "Hosur, Tamil Nadu",
+        "status": "ongoing",
+        "price": "On Request",
+        "imageUrl": "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800",
+        "featured": true,
+        "createdAt": "2026-03-13T12:45:00.000Z"
     }
 ]
