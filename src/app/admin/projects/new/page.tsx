@@ -9,7 +9,7 @@ export default function NewProjectPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const [error, setError] = useState("");
-    const [imageMode, setImageMode] = useState<"upload" | "url">("upload");
+    const [imageMode, setImageMode] = useState<"upload" | "url">("url");
 
     const [formData, setFormData] = useState({
         title: "",
