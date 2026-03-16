@@ -16,6 +16,9 @@ interface Property {
     featured: boolean;
     createdAt: string;
 }
+
+export const maxDuration = 60; // Max allowed for Vercel hobby plan
+export const dynamic = 'force-dynamic';
 export async function GET() {
     let properties: Property[] = [];
     try {

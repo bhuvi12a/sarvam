@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { readData, writeData } from '@/lib/dataStore';
 import path from 'path';
 
+export const maxDuration = 60; // Max allowed for Vercel hobby plan
+export const dynamic = 'force-dynamic';
+
 interface Project {
     id?: string;
     title: string;
@@ -51,6 +54,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
     try {
+        // Next.js body parser can be memory intensive for large payloads
         const body = await req.json();
 
         if (!body.title || !body.location) {
@@ -102,6 +106,6 @@ export async function POST(req: Request) {
         }
     } catch (error) {
         console.error('Failed to create project:', error);
-        return NextResponse.json({ error: 'Failed to create project' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to create project. Payload too large or invalid.' }, { status: 500 });
     }
 }
