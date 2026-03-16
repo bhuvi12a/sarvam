@@ -21,7 +21,7 @@ export default function NewProjectPage() {
         featured: false,
     });
 
-    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
 
@@ -30,8 +30,8 @@ export default function NewProjectPage() {
             return;
         }
 
-        if (file.size > 5 * 1024 * 1024) {
-            setError("Image size should be less than 5MB");
+        if (file.size > 2 * 1024 * 1024) {
+            setError("Image size should be less than 2MB");
             return;
         }
 
@@ -39,22 +39,20 @@ export default function NewProjectPage() {
         setError("");
 
         try {
-            const uploadForm = new FormData();
-            uploadForm.append("file", file);
-
-            const response = await fetch("/api/upload", {
-                method: "POST",
-                body: uploadForm,
-            });
-
-            if (!response.ok) throw new Error("Upload failed");
-
-            const data = await response.json();
-            setFormData((prev) => ({ ...prev, imageUrl: data.url }));
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result as string;
+                setFormData((prev) => ({ ...prev, imageUrl: base64String }));
+                setIsUploading(false);
+            };
+            reader.onerror = () => {
+                setError("Failed to read the file.");
+                setIsUploading(false);
+            };
+            reader.readAsDataURL(file);
         } catch (err) {
-            setError("Failed to upload image. Please try again.");
+            setError("Failed to process image. Please try again.");
             console.error(err);
-        } finally {
             setIsUploading(false);
         }
     };

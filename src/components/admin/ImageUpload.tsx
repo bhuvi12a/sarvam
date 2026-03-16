@@ -16,25 +16,30 @@ export default function ImageUpload({ value, onChange, onRemove }: ImageUploadPr
         const file = e.target.files?.[0];
         if (!file) return;
 
+        // Ensure file is less than 2MB (2 * 1024 * 1024 bytes) to avoid Vercel API payload limits
+        if (file.size > 2 * 1024 * 1024) {
+            alert("Image size should be less than 2MB to prevent upload errors.");
+            return;
+        }
+
         setLoading(true);
 
-        const formData = new FormData();
-        formData.append("file", file);
-
         try {
-            const res = await fetch("/api/upload", {
-                method: "POST",
-                body: formData,
-            });
-
-            if (!res.ok) throw new Error("Upload failed");
-
-            const data = await res.json();
-            onChange(data.url);
+            // Convert file to Base64
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result as string;
+                onChange(base64String);
+                setLoading(false);
+            };
+            reader.onerror = () => {
+                alert("Failed to read the file.");
+                setLoading(false);
+            };
+            reader.readAsDataURL(file);
         } catch (error) {
             console.error("Upload error:", error);
-            alert("Failed to upload image.");
-        } finally {
+            alert("Failed to process image.");
             setLoading(false);
         }
     };
