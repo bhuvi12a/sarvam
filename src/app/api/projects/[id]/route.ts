@@ -62,22 +62,55 @@ export async function PUT(
     }
 }
 
+// Helper: read from local projects.json (fallback only)
+async function readFromJson(): Promise<Project[]> {
+    try {
+        const fs = await import('fs/promises');
+        const jsonPath = require('path').join(process.cwd(), 'data', 'projects.json');
+        const jsonData = await fs.readFile(jsonPath, 'utf-8');
+        return JSON.parse(jsonData);
+    } catch {
+        return [];
+    }
+}
+
+// Helper: write to local projects.json (fallback only)
+async function writeToJson(projects: Project[]): Promise<void> {
+    const fs = await import('fs/promises');
+    const jsonPath = require('path').join(process.cwd(), 'data', 'projects.json');
+    await fs.writeFile(jsonPath, JSON.stringify(projects, null, 4), 'utf-8');
+}
+
 export async function DELETE(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params;
-        const deleted = await deleteData('projects', id);
-
-        if (!deleted) {
-            return NextResponse.json(
-                { error: 'Project not found' },
-                { status: 404 }
-            );
+        
+        try {
+            const deleted = await deleteData('projects', id);
+            if (deleted) {
+                return NextResponse.json({ success: true });
+            }
+        } catch (mongoError) {
+             console.warn('MongoDB delete failed, falling back to projects.json:', (mongoError as Error).message);
         }
 
-        return NextResponse.json({ success: true });
+        // Fallback to JSON deletion
+        const projects = await readFromJson();
+        const initialLength = projects.length;
+        const filteredProjects = projects.filter(p => p.id !== id);
+        
+        if (filteredProjects.length !== initialLength) {
+             await writeToJson(filteredProjects);
+             return NextResponse.json({ success: true });
+        }
+
+        return NextResponse.json(
+            { error: 'Project not found' },
+            { status: 404 }
+        );
     } catch (error) {
         return NextResponse.json(
             { error: 'Failed to delete project' },
