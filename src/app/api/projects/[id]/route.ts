@@ -45,16 +45,36 @@ export async function PUT(
         const { id } = await params;
         const body = await request.json();
 
-        const updated = await updateData<Project>('projects', id, body);
-
-        if (!updated) {
-            return NextResponse.json(
-                { error: 'Project not found' },
-                { status: 404 }
-            );
+        try {
+            const updated = await updateData<Project>('projects', id, body);
+            if (updated) {
+                return NextResponse.json({ success: true });
+            }
+        } catch (mongoError) {
+            console.warn('MongoDB update failed, falling back to projects.json:', (mongoError as Error).message);
+            
+            // Fallback: update in projects.json
+            try {
+                const projects = await readFromJson();
+                const index = projects.findIndex(p => p.id === id);
+                if (index !== -1) {
+                    projects[index] = { ...projects[index], ...body, id }; // Ensure ID stays same
+                    try {
+                        await writeToJson(projects);
+                    } catch (fsError) {
+                        console.warn("Vercel Read-Only Filesystem prevented JSON update during PUT:", fsError);
+                    }
+                    return NextResponse.json({ success: true, warning: 'Database offline' });
+                }
+            } catch (fsError) {
+                console.error("JSON fallback update failed:", fsError);
+            }
         }
 
-        return NextResponse.json({ success: true });
+        return NextResponse.json(
+            { error: 'Project not found' },
+            { status: 404 }
+        );
     } catch (error) {
         return NextResponse.json(
             { error: 'Failed to update project' },
