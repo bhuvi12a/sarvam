@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { deleteData, findById, updateData } from '@/lib/dataStore';
+import path from 'path';
 
 interface Project {
     id?: string;
@@ -66,7 +67,7 @@ export async function PUT(
 async function readFromJson(): Promise<Project[]> {
     try {
         const fs = await import('fs/promises');
-        const jsonPath = require('path').join(process.cwd(), 'data', 'projects.json');
+        const jsonPath = path.join(process.cwd(), 'data', 'projects.json');
         const jsonData = await fs.readFile(jsonPath, 'utf-8');
         return JSON.parse(jsonData);
     } catch {
@@ -77,7 +78,7 @@ async function readFromJson(): Promise<Project[]> {
 // Helper: write to local projects.json (fallback only)
 async function writeToJson(projects: Project[]): Promise<void> {
     const fs = await import('fs/promises');
-    const jsonPath = require('path').join(process.cwd(), 'data', 'projects.json');
+    const jsonPath = path.join(process.cwd(), 'data', 'projects.json');
     await fs.writeFile(jsonPath, JSON.stringify(projects, null, 4), 'utf-8');
 }
 
@@ -86,7 +87,8 @@ export async function DELETE(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = await params;
+        const resolvedParams = await params;
+        const id = resolvedParams.id;
         
         try {
             const deleted = await deleteData('projects', id);
@@ -98,13 +100,17 @@ export async function DELETE(
         }
 
         // Fallback to JSON deletion
-        const projects = await readFromJson();
-        const initialLength = projects.length;
-        const filteredProjects = projects.filter(p => p.id !== id);
-        
-        if (filteredProjects.length !== initialLength) {
-             await writeToJson(filteredProjects);
-             return NextResponse.json({ success: true });
+        try {
+            const projects = await readFromJson();
+            const initialLength = projects.length;
+            const filteredProjects = projects.filter(p => p.id !== id);
+            
+            if (filteredProjects.length !== initialLength) {
+                 await writeToJson(filteredProjects);
+                 return NextResponse.json({ success: true });
+            }
+        } catch (fsError) {
+            console.error("JSON fallback delete failed:", fsError);
         }
 
         return NextResponse.json(
@@ -112,8 +118,9 @@ export async function DELETE(
             { status: 404 }
         );
     } catch (error) {
+        console.error("Delete Error Handler Catched:", error);
         return NextResponse.json(
-            { error: 'Failed to delete project' },
+            { error: 'Failed to delete project', details: (error as Error).message },
             { status: 500 }
         );
     }
