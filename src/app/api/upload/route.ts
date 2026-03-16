@@ -19,18 +19,27 @@ export async function POST(req: Request) {
 
         try {
             await mkdir(uploadDir, { recursive: true });
-        } catch (e) {
-            // Directory already exists
+            await writeFile(path.join(uploadDir, filename), buffer);
+
+            return NextResponse.json({
+                url: `/uploads/${filename}`,
+                success: true
+            });
+        } catch (fsError: any) {
+            console.error('Filesystem error:', fsError);
+            
+            // Helpful error for Vercel users
+            if (process.env.VERCEL) {
+                return NextResponse.json({ 
+                    error: 'Image upload to server is not supported on Vercel.',
+                    hint: 'Please use the "Paste URL" tab instead, or set up Cloudinary/Supabase storage.'
+                }, { status: 501 });
+            }
+            
+            throw fsError;
         }
-
-        await writeFile(path.join(uploadDir, filename), buffer);
-
-        return NextResponse.json({
-            url: `/uploads/${filename}`,
-            success: true
-        });
-    } catch (error) {
+    } catch (error: any) {
         console.error('Upload error:', error);
-        return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+        return NextResponse.json({ error: 'Upload failed: ' + error.message }, { status: 500 });
     }
 }

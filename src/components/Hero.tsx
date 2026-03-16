@@ -27,18 +27,22 @@ export function Hero() {
                 const locationSet = new Set<string>();
 
                 // Properties use 'address' field
-                properties.forEach((item: any) => {
-                    if (item.address && item.address.trim()) {
-                        locationSet.add(item.address.trim());
-                    }
-                });
+                if (Array.isArray(properties)) {
+                    properties.forEach((item: any) => {
+                        if (item.address && item.address.trim()) {
+                            locationSet.add(item.address.trim());
+                        }
+                    });
+                }
 
                 // Projects use 'location' field
-                projects.forEach((item: any) => {
-                    if (item.location && item.location.trim()) {
-                        locationSet.add(item.location.trim());
-                    }
-                });
+                if (Array.isArray(projects)) {
+                    projects.forEach((item: any) => {
+                        if (item.location && item.location.trim()) {
+                            locationSet.add(item.location.trim());
+                        }
+                    });
+                }
 
                 // Sort locations alphabetically
                 const sortedLocations = Array.from(locationSet).sort();

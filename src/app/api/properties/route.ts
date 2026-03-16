@@ -16,29 +16,29 @@ interface Property {
     featured: boolean;
     createdAt: string;
 }
-
 export async function GET() {
+    let properties: Property[] = [];
     try {
-        let properties = await readData<Property>('properties');
-
-        // Fallback to mockData if MongoDB is empty
-        if (!properties || properties.length === 0) {
-            try {
-                const mockData = await import('@/data/mockData');
-                properties = mockData.PROPERTIES.map((prop: any) => ({
-                    ...prop,
-                    featured: true,
-                    createdAt: new Date().toISOString(),
-                }));
-            } catch (error) {
-                console.error('Failed to load mockData:', error);
-            }
-        }
-
-        return NextResponse.json(properties);
+        properties = await readData<Property>('properties');
     } catch (error) {
-        return NextResponse.json({ error: 'Failed to fetch properties' }, { status: 500 });
+        console.warn('MongoDB unavailable for GET /api/properties:', (error as Error).message);
     }
+
+    // Fallback to mockData if MongoDB is empty or unavailable
+    if (!properties || properties.length === 0) {
+        try {
+            const mockData = await import('@/data/mockData');
+            properties = mockData.PROPERTIES.map((prop: any) => ({
+                ...prop,
+                featured: true,
+                createdAt: new Date().toISOString(),
+            }));
+        } catch (error) {
+            console.error('Failed to load mockData:', error);
+        }
+    }
+
+    return NextResponse.json(properties);
 }
 
 export async function POST(req: Request) {

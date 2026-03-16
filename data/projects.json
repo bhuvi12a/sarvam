@@ -64,5 +64,16 @@
         "imageUrl": "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800",
         "featured": true,
         "createdAt": "2026-03-13T12:45:00.000Z"
+    },
+    {
+        "title": "dfrcdx",
+        "description": "dcdcfdcdc",
+        "location": "ededededed",
+        "status": "Ongoing",
+        "price": "54321",
+        "imageUrl": "/uploads/1773661899852-soldarin_smd_station_digital_dispaly.jpg",
+        "featured": false,
+        "createdAt": "2026-03-16T11:51:44.052Z",
+        "id": "7"
     }
 ]
