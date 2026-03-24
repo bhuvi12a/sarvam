@@ -42,39 +42,62 @@ async function writeToJson(properties: Property[]): Promise<void> {
 }
 
 export async function GET() {
-    let properties: Property[] = [];
+    let mongoProperties: Property[] = [];
+    let jsonProperties: Property[] = [];
+    let mockProperties: Property[] = [];
+
+    // 1. Try MongoDB
     try {
-        properties = await readData<Property>('properties');
-        if (properties && properties.length > 0) {
-            return NextResponse.json(properties);
-        }
+        mongoProperties = await readData<Property>('properties');
     } catch (error) {
         console.warn('MongoDB unavailable for GET /api/properties:', (error as Error).message);
     }
 
-    // Fallback 1: Try reading from properties.json
+    // 2. Try reading from properties.json
     try {
-        const jsonProperties = await readFromJson();
-        if (jsonProperties && jsonProperties.length > 0) {
-            return NextResponse.json(jsonProperties);
-        }
+        jsonProperties = await readFromJson();
     } catch (fsError) {
-        console.warn('Filesystem fallback failed for Properties:', fsError);
+        console.warn('Failed to read properties.json:', fsError);
     }
 
-    // Fallback 2: Load mockData
+    // 3. Load mockData as a base if everything else is sparse
     try {
         const mockData = await import('@/data/mockData');
-        properties = mockData.PROPERTIES.map((prop: any) => ({
+        mockProperties = mockData.PROPERTIES.map((prop: any) => ({
             ...prop,
-            featured: true,
-            createdAt: new Date().toISOString(),
+            featured: prop.featured ?? true,
+            createdAt: prop.createdAt || new Date().toISOString(),
         }));
     } catch (error) {
         console.error('Failed to load mockData:', error);
     }
 
-    return NextResponse.json(properties);
+    // 4. Merge results with deduplication by title
+    const allPropertiesMap = new Map<string, Property>();
+
+    // Mock data as lowest priority
+    mockProperties.forEach(p => {
+        if (p.title) allPropertiesMap.set(p.title.toLowerCase().trim(), p);
+    });
+
+    // JSON properties second
+    jsonProperties.forEach(p => {
+        if (p.title) allPropertiesMap.set(p.title.toLowerCase().trim(), p);
+    });
+
+    // MongoDB as highest priority
+    mongoProperties.forEach(p => {
+        if (p.title) allPropertiesMap.set(p.title.toLowerCase().trim(), p);
+    });
+
+    const combinedProperties = Array.from(allPropertiesMap.values());
+
+    // Sort by createdAt descending
+    combinedProperties.sort((a, b) => {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+
+    return NextResponse.json(combinedProperties);
 }
 
 export async function POST(req: Request) {

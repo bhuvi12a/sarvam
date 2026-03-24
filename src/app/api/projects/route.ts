@@ -37,19 +37,46 @@ async function writeToJson(projects: Project[]): Promise<void> {
 }
 
 export async function GET() {
-    // Try MongoDB first
+    let mongoProjects: Project[] = [];
+    let jsonProjects: Project[] = [];
+
+    // 1. Try MongoDB
     try {
-        const projects = await readData<Project>('projects');
-        if (projects && projects.length > 0) {
-            return NextResponse.json(projects);
-        }
+        mongoProjects = await readData<Project>('projects');
     } catch (mongoError) {
         console.warn('MongoDB unavailable for GET /api/projects:', (mongoError as Error).message);
     }
 
-    // Fallback: serve from projects.json
-    const projects = await readFromJson();
-    return NextResponse.json(projects);
+    // 2. Always try reading from projects.json as well
+    try {
+        jsonProjects = await readFromJson();
+    } catch (fsError) {
+        console.warn('Failed to read projects.json:', fsError);
+    }
+
+    // 3. Merge results
+    // Use a Map to deduplicate by title to avoid showing the same project twice
+    // if it exists in both MongoDB (new) and JSON (old)
+    const allProjectsMap = new Map<string, Project>();
+
+    // Add JSON projects first (voted as "base" data)
+    jsonProjects.forEach(p => {
+        if (p.title) allProjectsMap.set(p.title.toLowerCase().trim(), p);
+    });
+
+    // Add MongoDB projects (overwrites JSON if titles match - voted as "fresher" data)
+    mongoProjects.forEach(p => {
+        if (p.title) allProjectsMap.set(p.title.toLowerCase().trim(), p);
+    });
+
+    const combinedProjects = Array.from(allProjectsMap.values());
+
+    // Sort by createdAt descending if possible
+    combinedProjects.sort((a, b) => {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+
+    return NextResponse.json(combinedProjects);
 }
 
 export async function POST(req: Request) {

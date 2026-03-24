@@ -19,7 +19,20 @@ export async function GET(
 ) {
     try {
         const { id } = await params;
-        const project = await findById<Project>('projects', id);
+        
+        // 1. Try MongoDB
+        try {
+            const project = await findById<Project>('projects', id);
+            if (project) {
+                return NextResponse.json(project);
+            }
+        } catch (mongoError) {
+            console.warn('MongoDB lookup failed for individual project:', mongoError);
+        }
+
+        // 2. Fallback to JSON
+        const projects = await readFromJson();
+        const project = projects.find(p => p.id === id);
 
         if (!project) {
             return NextResponse.json(

@@ -6,7 +6,7 @@ import { PageBanner } from "@/components/PageBanner";
 import { Loader2 } from "lucide-react";
 
 interface Project {
-    id: number;
+    id: string;
     title: string;
     description: string;
     location: string;
