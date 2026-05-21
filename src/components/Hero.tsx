@@ -76,11 +76,20 @@ export function Hero() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 w-full max-w-5xl px-4 sm:px-6 lg:px-8 text-center text-white">
+            <div className="relative z-10 w-full max-w-5xl px-4 sm:px-6 lg:px-8 text-center text-white flex flex-col items-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-semibold tracking-wide uppercase text-yellow-400 mb-6 hover:bg-white/15 transition-all shadow-lg"
+                >
+                    ⭐ Top Rated & Low Budget Plots in Hosur
+                </motion.div>
+
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
                     className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-4 sm:mb-6"
                 >
                     Best Real Estate Agency in <span className="text-primary">Hosur</span>
@@ -92,7 +101,7 @@ export function Hero() {
                     transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
                     className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 mb-6 sm:mb-10 max-w-2xl mx-auto px-4"
                 >
-                    Explore the best villas, plots, and commercial lands in Hosur & Krishnagiri. Your trusted partner for real estate excellence.
+                    Explore premium luxury villas, low budget plots, and commercial lands in Hosur & Krishnagiri. Your trusted partner for real estate excellence.
                 </motion.p>
 
                 <motion.div

@@ -11,11 +11,13 @@ export const metadata: Metadata = {
     (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')
   ),
   title: {
-    default: 'Sarvam Real Estate - Best Villas & Plots for Sale in Hosur',
+    default: 'Sarvam Real Estate - Low Budget Plots & Villas for Sale in Hosur',
     template: '%s | Sarvam Real Estate Hosur',
   },
-  description: 'Sarvam Real Estate is the premier property agency in Hosur. We offer luxury 2BHK/3BHK villas, residential plots, and commercial lands in Hosur, Krishnagiri, and Karapalli. Trusted builders with 10+ years of excellence.',
+  description: 'Sarvam Real Estate is the premier agency for premium & low budget plots in Hosur. Discover luxury 2BHK/3BHK villas, residential plots, and commercial lands in Hosur & Krishnagiri. Trusted builders with 10+ years of excellence.',
   keywords: [
+    'low budget plots in hosur',
+    'low budget plots for sale in hosur',
     'real estate hosur',
     'villas in hosur for sale',
     'plots in hosur',
