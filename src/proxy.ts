@@ -2,13 +2,11 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { verifyToken, COOKIE_CONFIG } from './lib/auth';
 
-export function middleware(request: NextRequest) {
-    // Temporarily disabled to test login
-    // Will re-enable after confirming auth works
-    console.log('Middleware bypassed for testing');
-    return NextResponse.next();
-
-    /* ORIGINAL CODE - COMMENTED OUT FOR TESTING
+/**
+ * Next.js Proxy (formerly Middleware)
+ * Handles authentication for admin routes
+ */
+export function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     // Allow access to login page
@@ -48,10 +46,11 @@ export function middleware(request: NextRequest) {
     }
 
     return NextResponse.next();
-    */
 }
+
+// Fallback for older versions or if the convention only renamed the file
+export const middleware = proxy;
 
 export const config = {
     matcher: '/admin/:path*',
 };
-

@@ -1,8 +1,15 @@
 "use client";
 
-export function WhatsAppButton() {
-    const phoneNumber = "919940066449"; // Format: country code + number (no + or spaces)
-    const whatsappUrl = `https://wa.me/${phoneNumber}`;
+interface WhatsAppButtonProps {
+    phoneNumber?: string;
+    message?: string;
+}
+
+export function WhatsAppButton({ 
+    phoneNumber = "919940066449", 
+    message = "Hi! I'm interested in your real estate services." 
+}: WhatsAppButtonProps) {
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
     return (
         <div className="fixed bottom-6 right-6 z-50">
@@ -29,7 +36,7 @@ export function WhatsAppButton() {
 
                 {/* Hover tooltip */}
                 <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-sm font-medium px-4 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
-                    💬 Chat with us on WhatsApp
+                    💬 Chat with us
                 </span>
             </a>
         </div>

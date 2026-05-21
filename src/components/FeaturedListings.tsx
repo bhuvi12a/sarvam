@@ -1,14 +1,18 @@
 "use client";
 
 import { ListingCard } from "./ListingCard";
-import { PROPERTIES } from "@/data/mockData";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
-export function FeaturedListings() {
+interface FeaturedListingsProps {
+    initialProperties?: any[];
+}
+
+export function FeaturedListings({ initialProperties = [] }: FeaturedListingsProps) {
     return (
         <section id="listings" className="py-24 bg-zinc-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="v-flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                     <div className="max-w-2xl">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
@@ -28,30 +32,37 @@ export function FeaturedListings() {
                             Discover our hand-picked selection of the most prestigious properties available now.
                         </motion.p>
                     </div>
-                    <motion.button
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="hidden md:inline-flex items-center gap-2 border border-gray-200 dark:border-gray-800 px-6 py-3 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+                    <Link
+                        href="/properties"
+                        className="hidden md:inline-flex items-center gap-2 border border-gray-200 dark:border-gray-800 px-6 py-3 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors font-medium"
                     >
                         View All Properties
-                    </motion.button>
+                    </Link>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {PROPERTIES.map((property, index) => (
-                        <ListingCard
-                            key={property.id}
-                            {...property}
-                            index={index}
-                        />
-                    ))}
+                    {initialProperties.length > 0 ? (
+                        initialProperties.map((property, index) => (
+                            <ListingCard
+                                key={property.id}
+                                {...property}
+                                index={index}
+                            />
+                        ))
+                    ) : (
+                        <div className="col-span-full text-center py-12 text-gray-500">
+                            No featured properties at the moment.
+                        </div>
+                    )}
                 </div>
 
                 <div className="mt-12 text-center md:hidden">
-                    <button className="inline-flex items-center gap-2 border border-gray-200 dark:border-gray-800 px-6 py-3 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
+                    <Link
+                        href="/properties"
+                        className="inline-flex items-center gap-2 border border-gray-200 dark:border-gray-800 px-6 py-3 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors font-medium"
+                    >
                         View All Properties
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>

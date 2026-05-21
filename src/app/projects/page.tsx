@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { PageBanner } from "@/components/PageBanner";
 import { Loader2 } from "lucide-react";
 
@@ -80,9 +81,12 @@ export default function ProjectsPage() {
                                         <p className="text-gray-600 mb-6 leading-relaxed">
                                             {project.description}
                                         </p>
-                                        <button className="text-primary font-semibold hover:text-secondary transition-colors group-hover:underline underline-offset-4 decoration-2">
+                                        <Link 
+                                            href={`/projects/${project.id}`}
+                                            className="text-primary font-semibold hover:text-secondary transition-colors group-hover:underline underline-offset-4 decoration-2"
+                                        >
                                             View Project Details
-                                        </button>
+                                        </Link>
                                     </div>
                                 </div>
                             ))}

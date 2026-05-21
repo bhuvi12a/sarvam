@@ -114,7 +114,52 @@ export async function findById<T>(
         return { ...doc, id: doc._id.toString(), _id: undefined } as T;
     } catch (error) {
         console.error('Error finding by ID:', error);
-        return null;
+        // Fallback to JSON for read operations
+        try {
+            const data = await readDataFromJSON<T>(collectionName);
+            return data.find((item: any) => item.id === id) || null;
+        } catch (jsonError) {
+            return null;
+        }
+    }
+}
+
+// Higher-level helpers
+export async function getAllProperties() {
+    try {
+        return await readData<any>('properties');
+    } catch (error) {
+        return await readDataFromJSON<any>('properties');
+    }
+}
+
+export async function getAllProjects() {
+    try {
+        return await readData<any>('projects');
+    } catch (error) {
+        return await readDataFromJSON<any>('projects');
+    }
+}
+
+export async function getPropertyById(id: string) {
+    return await findById<any>('properties', id);
+}
+
+export async function getProjectById(id: string) {
+    return await findById<any>('projects', id);
+}
+
+// JSON Fallback helpers
+async function readDataFromJSON<T>(collectionName: string): Promise<T[]> {
+    const fs = require('fs/promises');
+    const path = require('path');
+    try {
+        const filePath = path.join(process.cwd(), 'data', `${collectionName}.json`);
+        const content = await fs.readFile(filePath, 'utf8');
+        return JSON.parse(content);
+    } catch (error) {
+        console.error(`Error reading ${collectionName} from JSON:`, error);
+        return [];
     }
 }
 

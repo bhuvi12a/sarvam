@@ -80,9 +80,12 @@ export function ListingCard({
 
                 <div className="flex items-center justify-between pt-3 sm:pt-4 mt-1 sm:mt-2">
                     <span className="text-xl sm:text-2xl font-bold text-primary">{price}</span>
-                    <button className="text-xs sm:text-sm font-semibold underline decoration-2 underline-offset-4 decoration-transparent group-hover:decoration-current transition-all">
+                    <Link 
+                        href={`/properties/${id}`}
+                        className="text-xs sm:text-sm font-semibold underline decoration-2 underline-offset-4 decoration-transparent group-hover:decoration-current transition-all"
+                    >
                         View Details
-                    </button>
+                    </Link>
                 </div>
             </div>
         </motion.div>
