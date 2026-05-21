@@ -31,10 +31,10 @@ export function Footer() {
                         <h3 className="font-semibold text-gray-800 dark:text-white mb-6">Quick Links</h3>
                         <ul className="space-y-3">
                             <FooterLink href="/">Home</FooterLink>
-                            <FooterLink href="#listings">Properties</FooterLink>
-                            <FooterLink href="#about">About Us</FooterLink>
-                            <FooterLink href="#services">Services</FooterLink>
-                            <FooterLink href="#contact">Contact</FooterLink>
+                            <FooterLink href="/projects">Projects</FooterLink>
+                            <FooterLink href="/about">About Us</FooterLink>
+                            <FooterLink href="/services">Services</FooterLink>
+                            <FooterLink href="/contact">Contact Us</FooterLink>
                         </ul>
                     </div>
 
