@@ -67,7 +67,7 @@ export function Footer() {
                         </ul>
                         <div className="flex items-center gap-3 text-zinc-600 dark:text-zinc-300 mt-4">
                             <Mail className="h-5 w-5 text-primary" />
-                            <span>sarvambuilder07@gmail.com</span>
+                            <span>info@sarvambuilders.com</span>
                         </div>
                     </div>
                 </div>

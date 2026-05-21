@@ -151,7 +151,7 @@ export default function RootLayout({
               logo: `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/logo.png`,
               description: 'Leading real estate company in Hosur specializing in villas, residential properties, commercial spaces, and land sales.',
               telephone: '+919940066449',
-              email: 'sarvambuilder07@gmail.com',
+              email: 'info@sarvambuilders.com',
               address: {
                 '@type': 'PostalAddress',
                 streetAddress: 'Pattalamman Nagar, Rayakottai Road',
