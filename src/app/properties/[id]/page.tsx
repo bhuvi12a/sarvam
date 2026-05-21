@@ -7,11 +7,12 @@ import Link from 'next/link';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 
 interface Props {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const property = await getPropertyById(params.id);
+    const { id } = await params;
+    const property = await getPropertyById(id);
     if (!property) return { title: 'Contact Our Expert - Low Budget Plots in Hosur' };
 
     return {
@@ -33,7 +34,8 @@ export async function generateStaticParams() {
 }
 
 export default async function PropertyDetailPage({ params }: Props) {
-    const property = await getPropertyById(params.id);
+    const { id } = await params;
+    const property = await getPropertyById(id);
 
     if (!property) {
         return (

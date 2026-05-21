@@ -7,11 +7,12 @@ import Link from 'next/link';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 
 interface Props {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const project = await getProjectById(params.id);
+    const { id } = await params;
+    const project = await getProjectById(id);
     if (!project) return { title: 'Project Not Found' };
 
     return {
@@ -33,7 +34,8 @@ export async function generateStaticParams() {
 }
 
 export default async function ProjectDetailPage({ params }: Props) {
-    const project = await getProjectById(params.id);
+    const { id } = await params;
+    const project = await getProjectById(id);
 
     if (!project) {
         notFound();
