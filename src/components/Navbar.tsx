@@ -91,10 +91,6 @@ export function Navbar() {
             label: 'Home'
         },
         {
-            href: '/properties',
-            label: 'Properties'
-        },
-        {
             href: '/projects',
             label: 'Projects'
         },
@@ -208,8 +204,35 @@ export function Navbar() {
                 : 'bg-white border-b border-gray-200/30'
                 }`}
         >
+            {/* Top Bar for Tagline and Contact Info */}
+            <div 
+                className={`bg-secondary text-white text-[11px] sm:text-xs transition-all duration-300 overflow-hidden ${
+                    isScrolled ? 'h-0 opacity-0 border-none' : 'h-10 sm:h-8 opacity-100 py-1.5 sm:py-1 border-b border-secondary/20 shadow-sm'
+                } relative z-50`}
+            >
+                <div className="container mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-1 sm:gap-4 font-medium tracking-wide">
+                    <div className="flex items-center gap-1.5 text-center justify-center sm:justify-start">
+                        <span className="inline-block text-yellow-400 animate-bounce">🏡</span>
+                        <span>Discover Top-Rated &amp; <strong className="text-yellow-400 font-semibold">Low Budget Plots in Hosur</strong> for Sale</span>
+                    </div>
+                    <div className="flex items-center gap-4 shrink-0 justify-center">
+                        <a href="tel:+919940066449" className="flex items-center gap-1 hover:text-yellow-400 transition-colors">
+                            <FaPhone className="w-2.5 h-2.5 text-yellow-400" />
+                            <span>+91 99400 66449</span>
+                        </a>
+                        <span className="text-white/20">|</span>
+                        <a href="mailto:info@sarvambuilders.com" className="flex items-center gap-1 hover:text-yellow-400 transition-colors">
+                            <FaEnvelope className="w-2.5 h-2.5 text-yellow-400" />
+                            <span>info@sarvambuilders.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <div className="container mx-auto px-4 sm:px-6">
-                <nav className="flex items-center justify-between h-32 md:h-36">
+                <nav className={`flex items-center justify-between transition-all duration-300 ${
+                    isScrolled ? 'h-20 md:h-24' : 'h-32 md:h-36'
+                }`}>
                     {/* Desktop Logo - Hidden on mobile */}
                     <div className="hidden xl:block h-full">
                         <DesktopLogo />
@@ -359,7 +382,7 @@ export function Navbar() {
                             exit={{ opacity: 0 }}
                             className="fixed bg-black/50 backdrop-blur-sm xl:hidden"
                             style={{
-                                top: isScrolled ? '64px' : '80px',
+                                top: isScrolled ? '80px' : '160px',
                                 left: 0,
                                 right: 0,
                                 bottom: 0,
