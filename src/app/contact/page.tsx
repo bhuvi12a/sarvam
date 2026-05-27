@@ -178,6 +178,38 @@ export default function ContactPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Google Map Section */}
+            <section className="pb-12 sm:pb-16 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                <div className="bg-zinc-50 dark:bg-zinc-900 rounded-[2.5rem] p-4 sm:p-6 md:p-8 border border-zinc-100 dark:border-zinc-800 shadow-xl overflow-hidden">
+                    <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div>
+                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Find Us on Google Maps</h2>
+                            <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1">Conveniently located at Pattalamman Nagar, Rayakottai Road, Hosur</p>
+                        </div>
+                        <a 
+                            href="https://www.google.com/maps/search/?api=1&query=Sarvam+Builders+Realtors+Hosur" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center bg-primary text-white font-bold px-6 py-3 rounded-xl hover:bg-secondary transition-all text-sm shadow-md shadow-primary/10 hover:shadow-lg"
+                        >
+                            Get Directions
+                        </a>
+                    </div>
+                    <div className="relative aspect-[16/9] md:aspect-[21/9] w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-700">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=Sarvam%20Builders%20%26%20Realtors%20Hosur&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="100%" 
+                            style={{ border: 0 }} 
+                            allowFullScreen={true} 
+                            loading="lazy" 
+                            referrerPolicy="no-referrer-when-downgrade"
+                            className="absolute inset-0 w-full h-full"
+                        />
+                    </div>
+                </div>
+            </section>
         </main>
     );
 }
