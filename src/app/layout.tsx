@@ -137,7 +137,6 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
         {/* Structured Data - Real Estate Organization */}
-        {/* Structured Data - Real Estate Organization */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -203,8 +202,7 @@ export default function RootLayout({
                 }
               ],
               sameAs: [
-                // 'https://facebook.com/sarvam',
-                // 'https://instagram.com/sarvam'
+                'https://youtube.com/@sarvambuildersrealtors?si=tQHfD7SHbMchwcp7'
               ],
             }),
           }}

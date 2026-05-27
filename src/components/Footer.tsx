@@ -1,4 +1,4 @@
-import { Home, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Building2, TreePine, Building } from "lucide-react";
+import { Home, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Building2, TreePine, Building, Youtube } from "lucide-react";
 import Link from "next/link";
 
 export function Footer() {
@@ -19,10 +19,9 @@ export function Footer() {
                             Redefining luxury living. We help you find properties that match your lifestyle and aspirations.
                         </p>
                         <div className="flex space-x-4">
-                            <SocialIcon icon={Facebook} />
-                            <SocialIcon icon={Twitter} />
-                            <SocialIcon icon={Instagram} />
-                            <SocialIcon icon={Linkedin} />
+                            <SocialIcon icon={Facebook} href="#" hoverClass="hover:bg-blue-600 hover:text-white" />
+                            <SocialIcon icon={Instagram} href="#" hoverClass="hover:bg-pink-600 hover:text-white" />
+                            <SocialIcon icon={Youtube} href="https://youtube.com/@sarvambuildersrealtors?si=tQHfD7SHbMchwcp7" hoverClass="hover:bg-red-600 hover:text-white" />
                         </div>
                     </div>
 
@@ -82,9 +81,14 @@ export function Footer() {
     );
 }
 
-function SocialIcon({ icon: Icon }: { icon: any }) {
+function SocialIcon({ icon: Icon, href, hoverClass = "hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black" }: { icon: any; href: string; hoverClass?: string }) {
     return (
-        <a href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
+        <a 
+            href={href} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={`h-10 w-10 flex items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 ${hoverClass} transition-colors`}
+        >
             <Icon className="h-5 w-5" />
         </a>
     );
