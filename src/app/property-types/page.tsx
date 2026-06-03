@@ -1,6 +1,15 @@
+import { Metadata } from "next";
 import Image from "next/image";
 
 import { PageBanner } from "@/components/PageBanner";
+
+export const metadata: Metadata = {
+    title: "Property Types - Sarvam Real Estate",
+    description: "Explore the variety of residential, commercial, and agricultural property types we offer in Hosur & Krishnagiri.",
+    alternates: {
+        canonical: "/property-types",
+    },
+};
 
 export default function PropertyTypesPage() {
     const types = [

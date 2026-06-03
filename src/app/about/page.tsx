@@ -12,6 +12,9 @@ export const metadata: Metadata = {
         title: "About Sarvam Real Estate",
         description: "Your trusted partner in real estate - helping you find the perfect property with expert guidance.",
     },
+    alternates: {
+        canonical: "/about",
+    },
 };
 
 export default function AboutPage() {

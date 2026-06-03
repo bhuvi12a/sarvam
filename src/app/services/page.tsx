@@ -20,6 +20,9 @@ export const metadata: Metadata = {
         title: "Real Estate Services - Sarvam",
         description: "Complete real estate solutions including property sales, home loans, construction, and interior design services.",
     },
+    alternates: {
+        canonical: "/services",
+    },
 };
 
 export default function ServicesPage() {
