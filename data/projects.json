@@ -119,5 +119,60 @@
         "imageUrl": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800",
         "featured": true,
         "createdAt": "2026-05-30T12:15:00.000Z"
+    },
+    {
+        "id": "2bhk-villas-in-hosur",
+        "title": "2BHK Villas in Hosur",
+        "description": "Explore budget-friendly 2BHK villas in Hosur for sale. Our modern independent 2BHK houses in prime locations like Karapalli and Rayakottai Road feature gated community benefits, independent EB connection, sweet drinking water, and high-quality construction.",
+        "location": "Hosur, Tamil Nadu",
+        "status": "ongoing",
+        "price": "₹55 Lakhs - ₹75 Lakhs",
+        "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+        "featured": true,
+        "createdAt": "2026-06-04T10:00:00.000Z"
+    },
+    {
+        "id": "3bhk-villas-in-hosur",
+        "title": "3BHK Villas in Hosur",
+        "description": "Premium gated community 3BHK villas in Hosur for sale. Spacious and elegant independent 3BHK houses in top locations with continuous borewell water supply, private compound walls, 100% vaastu compliance, security, and close proximity to Bangalore highways.",
+        "location": "Hosur, Tamil Nadu",
+        "status": "ongoing",
+        "price": "₹75 Lakhs - ₹95 Lakhs",
+        "imageUrl": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800",
+        "featured": true,
+        "createdAt": "2026-06-04T10:05:00.000Z"
+    },
+    {
+        "id": "2bhk-villas-sale-near-me",
+        "title": "2BHK Villas Sale Near Me",
+        "description": "Find the best 2BHK villas for sale near me in Hosur. Explore ready-to-occupy and ongoing independent 2BHK houses in top gated communities. Built with premium materials, sweet ground water, individual compound walls, and hassle-free bank loan approvals.",
+        "location": "Hosur, Tamil Nadu",
+        "status": "ongoing",
+        "price": "₹60 Lakhs - ₹75 Lakhs",
+        "imageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
+        "featured": true,
+        "createdAt": "2026-06-04T10:10:00.000Z"
+    },
+    {
+        "id": "2bhk-villas-sale-in-hosur",
+        "title": "2BHK Villas Sale in Hosur",
+        "description": "Premium 2BHK villas for sale in Hosur. Choose from architecturally designed independent 2BHK luxury houses with modular kitchens, personal borewells, independent EB connections, and prime access to Bangalore-Chennai national highway (NH-44).",
+        "location": "Hosur, Tamil Nadu",
+        "status": "ongoing",
+        "price": "₹55 Lakhs - ₹70 Lakhs",
+        "imageUrl": "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800",
+        "featured": true,
+        "createdAt": "2026-06-04T10:15:00.000Z"
+    },
+    {
+        "id": "low-budget-villas-near-me",
+        "title": "Low Budget Villas Near Me",
+        "description": "Discover premium-quality low budget villas for sale near me in Hosur starting from 45 lakhs. Fully approved gated communities and independent houses with customize layout designs, sweet ground water, separate electricity meters, and 24/7 security.",
+        "location": "Hosur, Tamil Nadu",
+        "status": "ongoing",
+        "price": "₹45 Lakhs - ₹65 Lakhs",
+        "imageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
+        "featured": true,
+        "createdAt": "2026-06-04T10:20:00.000Z"
     }
 ]

@@ -109,8 +109,24 @@ export async function findById<T>(
     try {
         const db = await getDb();
         const collection = db.collection(collectionName);
-        const doc = await collection.findOne({ _id: new ObjectId(id) });
-        if (!doc) return null;
+        
+        let query: any = {};
+        if (ObjectId.isValid(id) && id.length === 24) {
+            query = { _id: new ObjectId(id) };
+        } else {
+            query = { _id: id };
+        }
+        
+        const doc = await collection.findOne(query);
+        if (!doc) {
+            // Fallback to JSON for read operations if not in database
+            try {
+                const data = await readDataFromJSON<T>(collectionName);
+                return data.find((item: any) => item.id === id) || null;
+            } catch (jsonError) {
+                return null;
+            }
+        }
         return { ...doc, id: doc._id.toString(), _id: undefined } as T;
     } catch (error) {
         console.error('Error finding by ID:', error);
