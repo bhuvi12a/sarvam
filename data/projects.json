@@ -1,60 +1,5 @@
 [
     {
-        "id": "1",
-        "title": "2BHK Individual Villas",
-        "description": "Affordable and spacious 2BHK individual houses and villas for sale in Karapalli, Hosur. Features independent EB connection, private borewell, and DTCP approval. Perfect for budget-conscious families looking for high-quality construction in a peaceful environment near key highways.",
-        "location": "Karapalli, Hosur",
-        "status": "ongoing",
-        "price": "₹65 Lakhs",
-        "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-        "featured": true,
-        "createdAt": "2026-01-15T09:00:00.000Z"
-    },
-    {
-        "id": "2",
-        "title": "2BHK Luxury Villas",
-        "description": "Modern 2BHK luxury villas for sale in a gated community in Karapalli, Hosur. Architecturally designed with premium modular kitchens, private gardens, HNTDA approval, and top-tier community amenities. Excellent connectivity to Bangalore IT hubs.",
-        "location": "Karapalli, Hosur",
-        "status": "ongoing",
-        "price": "₹75 Lakhs",
-        "imageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
-        "featured": true,
-        "createdAt": "2026-01-15T09:00:00.000Z"
-    },
-    {
-        "id": "3",
-        "title": "3BHK Luxury Villas",
-        "description": "Premium 3BHK luxury villas for sale in Karapalli, Hosur. High-end gated community offering spacious bedrooms, private terrace, 24/7 security, and DTCP approval. A perfect blend of comfort and elegance for modern families wanting prime real estate in Hosur.",
-        "location": "Karapalli, Hosur",
-        "status": "ongoing",
-        "price": "₹84.99 Lakhs",
-        "imageUrl": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800",
-        "featured": true,
-        "createdAt": "2026-01-15T09:00:00.000Z"
-    },
-    {
-        "id": "4",
-        "title": "3BHK Modern Luxury Villas",
-        "description": "Modern luxury villas starting from 90.9 lakhs in Karapalli, Hosur. Masterfully constructed with high-yield borewell systems, individual EB connectivity, private car parking, and modern vaastu-compliant layout designs.",
-        "location": "Karapalli, Hosur",
-        "status": "ongoing",
-        "price": "₹90.9 Lakhs",
-        "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-        "featured": true,
-        "createdAt": "2026-01-15T09:00:00.000Z"
-    },
-    {
-        "id": "5",
-        "title": "4BHK Modern Luxury Villas",
-        "description": "Ultra-luxury 4BHK modern villas for sale in Karapalli, Hosur. Massive built-up area featuring smart home automation capability, beautifully landscaped private gardens, multiple balconies, 100% vaastu compliant design, and premium gated community amenities.",
-        "location": "Karapalli, Hosur",
-        "status": "ongoing",
-        "price": "₹99.99 Lakhs",
-        "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-        "featured": true,
-        "createdAt": "2026-01-15T09:00:00.000Z"
-    },
-    {
         "id": "6",
         "title": "Nexus Villas",
         "description": "Premium gated community villas offering a perfect blend of modern architecture and nature, with world-class amenities in the heart of Hosur. Features 2BHK, 3BHK, and 4BHK options with clear title deeds and bank finance assistance.",
@@ -91,7 +36,7 @@
         "id": "low-budget-villas-in-hosur",
         "title": "Low Budget Villas in Hosur",
         "description": "Premium quality low budget villas in Hosur for sale starting from 45 lakhs. Fully HNTDA approved individual houses and gated community villas with independent EB connectivity, customized layout designs, sweet ground water, and continuous security.",
-        "location": "Karapalli, Hosur",
+        "location": "Mathigiri, Hosur",
         "status": "ongoing",
         "price": "₹45 Lakhs - ₹75 Lakhs",
         "imageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
@@ -123,7 +68,7 @@
     {
         "id": "2bhk-villas-in-hosur",
         "title": "2BHK Villas in Hosur",
-        "description": "Explore budget-friendly 2BHK villas in Hosur for sale. Our modern independent 2BHK houses in prime locations like Karapalli and Rayakottai Road feature gated community benefits, independent EB connection, sweet drinking water, and high-quality construction.",
+        "description": "Explore budget-friendly 2BHK villas in Hosur for sale. Our modern independent 2BHK houses in prime locations like Rayakottai Road feature gated community benefits, independent EB connection, sweet drinking water, and high-quality construction.",
         "location": "Hosur, Tamil Nadu",
         "status": "ongoing",
         "price": "₹55 Lakhs - ₹75 Lakhs",

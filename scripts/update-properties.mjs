@@ -14,7 +14,7 @@ const PROPERTIES = [
     {
         title: "2BHK Individual Villas",
         price: "₹64.99 Lakhs",
-        address: "Karapalli, Hosur",
+        address: "Rayakottai Road, Hosur",
         beds: 2,
         baths: 2,
         sqft: 1200,
@@ -26,7 +26,7 @@ const PROPERTIES = [
     {
         title: "2BHK Luxury Villas",
         price: "₹74.99 Lakhs",
-        address: "Karapalli, Hosur",
+        address: "Mathigiri, Hosur",
         beds: 2,
         baths: 2,
         sqft: 1400,
@@ -38,7 +38,7 @@ const PROPERTIES = [
     {
         title: "3BHK Luxury Villas",
         price: "₹84.99 Lakhs",
-        address: "Karapalli, Hosur",
+        address: "Bagalur Road, Hosur",
         beds: 3,
         baths: 3,
         sqft: 1800,
@@ -50,7 +50,7 @@ const PROPERTIES = [
     {
         title: "4BHK Luxury Villas",
         price: "₹99.99 Lakhs",
-        address: "Karapalli, Hosur",
+        address: "NH-44 Highway, Hosur",
         beds: 4,
         baths: 4,
         sqft: 2500,

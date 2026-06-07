@@ -147,7 +147,7 @@ export default function NewProjectPage() {
                             value={formData.location}
                             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                             className="w-full px-4 py-2 border border-gray-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                            placeholder="e.g. Karapalli, Hosur"
+                            placeholder="e.g. Rayakottai Road, Hosur"
                         />
                     </div>
 

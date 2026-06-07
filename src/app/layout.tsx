@@ -44,12 +44,10 @@ export const metadata: Metadata = {
     'property dealers in hosur',
     'buy house in hosur',
     'independent house for sale in hosur',
-    'karapalli real estate',
     'sites for sale in hosur',
     'plots in rayakottai road hosur',
     'plots for sale in mathigiri',
     'villas in bagalur road hosur',
-    'plots in karapalli hosur',
   ],
   authors: [{ name: 'Sarvam Real Estate' }],
   creator: 'Sarvam Real Estate',
@@ -186,10 +184,6 @@ export default function RootLayout({
                 {
                   '@type': 'City',
                   name: 'Krishnagiri'
-                },
-                {
-                  '@type': 'City',
-                  name: 'Karapalli'
                 },
                 {
                   '@type': 'City',
