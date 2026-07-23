@@ -95,18 +95,23 @@ export async function deleteData(
         const db = await getDb();
         const collection = db.collection(collectionName);
 
-        // Try by MongoDB ObjectId first (24-char hex)
+        // 1. Try by MongoDB ObjectId (24-char hex — for newly created docs)
         if (ObjectId.isValid(id) && id.length === 24) {
             const result = await collection.deleteOne({ _id: new ObjectId(id) });
             if (result.deletedCount > 0) return true;
         }
 
-        // Fallback: delete by plain string `id` field (for JSON-seeded data)
-        const result = await collection.deleteOne({ id: id });
-        return result.deletedCount > 0;
+        // 2. Try by string _id (for JSON-seeded docs like "villas-in-hosur", "6", etc.)
+        const resultStr = await collection.deleteOne({ _id: id } as any);
+        if (resultStr.deletedCount > 0) return true;
+
+        // 3. Try by plain string `id` field as last resort
+        const resultField = await collection.deleteOne({ id: id });
+        return resultField.deletedCount > 0;
+
     } catch (error) {
         console.error('Error deleting from MongoDB:', error);
-        throw error; // Re-throw so the route can fall back to JSON
+        throw error; // Re-throw so route can fall back to JSON
     }
 }
 
