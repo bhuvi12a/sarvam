@@ -39,6 +39,7 @@ async function writeToJson(projects: Project[]): Promise<void> {
 export async function GET() {
     let mongoProjects: Project[] = [];
     let jsonProjects: Project[] = [];
+    let deletedIds: Set<string> = new Set();
 
     // 1. Try MongoDB
     try {
@@ -47,31 +48,41 @@ export async function GET() {
         console.warn('MongoDB unavailable for GET /api/projects:', (mongoError as Error).message);
     }
 
-    // 2. Always try reading from projects.json as well
+    // 2. Fetch list of deleted JSON-seeded project IDs from MongoDB
+    try {
+        const { getDb } = await import('@/lib/dataStore');
+        const db = await getDb();
+        const deleted = await db.collection('deleted_projects').find({}).toArray();
+        deletedIds = new Set(deleted.map((d: any) => String(d.projectId)));
+    } catch {
+        // MongoDB not available — no deletions tracked, show all JSON projects
+    }
+
+    // 3. Always try reading from projects.json as well
     try {
         jsonProjects = await readFromJson();
     } catch (fsError) {
         console.warn('Failed to read projects.json:', fsError);
     }
 
-    // 3. Merge results
-    // Use a Map to deduplicate by title to avoid showing the same project twice
-    // if it exists in both MongoDB (new) and JSON (old)
+    // 4. Merge results — filter out deleted JSON projects
     const allProjectsMap = new Map<string, Project>();
 
-    // Add JSON projects first (voted as "base" data)
+    // Add JSON projects first (base data), skipping deleted ones
     jsonProjects.forEach(p => {
-        if (p.title) allProjectsMap.set(p.title.toLowerCase().trim(), p);
+        if (p.title && !deletedIds.has(String(p.id))) {
+            allProjectsMap.set(p.title.toLowerCase().trim(), p);
+        }
     });
 
-    // Add MongoDB projects (overwrites JSON if titles match - voted as "fresher" data)
+    // Add MongoDB projects (overwrites JSON if titles match — fresher data)
     mongoProjects.forEach(p => {
         if (p.title) allProjectsMap.set(p.title.toLowerCase().trim(), p);
     });
 
     const combinedProjects = Array.from(allProjectsMap.values());
 
-    // Sort by createdAt descending if possible
+    // Sort by createdAt descending
     combinedProjects.sort((a, b) => {
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });

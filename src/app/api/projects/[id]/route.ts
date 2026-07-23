@@ -143,13 +143,31 @@ export async function DELETE(
             );
 
             if (filteredProjects.length !== initialLength) {
+                // 3. Try writing the updated JSON file (works locally, not on Vercel)
+                let jsonWritten = false;
                 try {
                     await writeToJson(filteredProjects);
+                    jsonWritten = true;
                 } catch (writeErr) {
-                    // Vercel filesystem is read-only — swallow the write error
-                    console.warn('Vercel Read-Only Filesystem prevented JSON update:', writeErr);
+                    console.warn('Vercel Read-Only Filesystem — storing deletion in MongoDB instead:', writeErr);
                 }
-                return NextResponse.json({ success: true, warning: 'Deleted from fallback store' });
+
+                // 4. If filesystem write failed, record deletion in MongoDB as a tombstone
+                if (!jsonWritten) {
+                    try {
+                        const { getDb } = await import('@/lib/dataStore');
+                        const db = await getDb();
+                        await db.collection('deleted_projects').updateOne(
+                            { projectId: String(id) },
+                            { $set: { projectId: String(id), deletedAt: new Date() } },
+                            { upsert: true }
+                        );
+                    } catch (tombstoneErr) {
+                        console.error('Failed to record deletion tombstone:', tombstoneErr);
+                    }
+                }
+
+                return NextResponse.json({ success: true });
             }
         } catch (fsError) {
             console.error('JSON fallback delete failed entirely:', fsError);
