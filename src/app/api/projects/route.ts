@@ -37,57 +37,25 @@ async function writeToJson(projects: Project[]): Promise<void> {
 }
 
 export async function GET() {
-    let mongoProjects: Project[] = [];
-    let jsonProjects: Project[] = [];
-    let deletedIds: Set<string> = new Set();
-
-    // 1. Try MongoDB
+    // ── MongoDB is the single source of truth ──────────────────────────────
+    // When MongoDB responds, use ONLY its data (so admin deletes take effect).
+    // Only fall back to projects.json if MongoDB is completely unreachable.
     try {
-        mongoProjects = await readData<Project>('projects');
+        const mongoProjects = await readData<Project>('projects');
+        mongoProjects.sort((a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+        return NextResponse.json(mongoProjects);
     } catch (mongoError) {
-        console.warn('MongoDB unavailable for GET /api/projects:', (mongoError as Error).message);
+        console.warn('MongoDB unavailable, serving projects.json fallback:', (mongoError as Error).message);
     }
 
-    // 2. Fetch list of deleted JSON-seeded project IDs from MongoDB
-    try {
-        const { getDb } = await import('@/lib/dataStore');
-        const db = await getDb();
-        const deleted = await db.collection('deleted_projects').find({}).toArray();
-        deletedIds = new Set(deleted.map((d: any) => String(d.projectId)));
-    } catch {
-        // MongoDB not available — no deletions tracked, show all JSON projects
-    }
-
-    // 3. Always try reading from projects.json as well
-    try {
-        jsonProjects = await readFromJson();
-    } catch (fsError) {
-        console.warn('Failed to read projects.json:', fsError);
-    }
-
-    // 4. Merge results — filter out deleted JSON projects
-    const allProjectsMap = new Map<string, Project>();
-
-    // Add JSON projects first (base data), skipping deleted ones
-    jsonProjects.forEach(p => {
-        if (p.title && !deletedIds.has(String(p.id))) {
-            allProjectsMap.set(p.title.toLowerCase().trim(), p);
-        }
-    });
-
-    // Add MongoDB projects (overwrites JSON if titles match — fresher data)
-    mongoProjects.forEach(p => {
-        if (p.title) allProjectsMap.set(p.title.toLowerCase().trim(), p);
-    });
-
-    const combinedProjects = Array.from(allProjectsMap.values());
-
-    // Sort by createdAt descending
-    combinedProjects.sort((a, b) => {
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    });
-
-    return NextResponse.json(combinedProjects);
+    // ── Emergency fallback: read from bundled projects.json ────────────────
+    const jsonProjects = await readFromJson();
+    jsonProjects.sort((a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+    return NextResponse.json(jsonProjects);
 }
 
 export async function POST(req: Request) {
