@@ -122,35 +122,37 @@ export async function DELETE(
     try {
         const resolvedParams = await params;
         const id = resolvedParams.id;
-        
+
+        // 1. Try MongoDB delete (handles both ObjectId and plain string id)
         try {
             const deleted = await deleteData('projects', id);
             if (deleted) {
                 return NextResponse.json({ success: true });
             }
         } catch (mongoError) {
-             console.warn('MongoDB delete failed, falling back to projects.json:', (mongoError as Error).message);
+            console.warn('MongoDB delete failed, falling back to projects.json:', (mongoError as Error).message);
         }
 
-        // Fallback to JSON deletion
+        // 2. Fallback: delete from local projects.json
         try {
             const projects = await readFromJson();
             const initialLength = projects.length;
-            const filteredProjects = projects.filter(p => p.id !== id);
-            
+            // Match by id field OR by stringified _id
+            const filteredProjects = projects.filter(
+                (p: any) => String(p.id) !== String(id) && String(p._id) !== String(id)
+            );
+
             if (filteredProjects.length !== initialLength) {
-                 try {
-                     await writeToJson(filteredProjects);
-                 } catch (writeErr) {
-                     // In Vercel, the filesystem is Read-Only.
-                     // We swallow this error so the user doesn't get a 500 crash
-                     console.warn("Vercel Read-Only Filesystem prevented JSON update:", writeErr);
-                 }
-                 // Return success regardless so the UI can proceed
-                 return NextResponse.json({ success: true, warning: 'Database offline and filesystem read-only' });
+                try {
+                    await writeToJson(filteredProjects);
+                } catch (writeErr) {
+                    // Vercel filesystem is read-only — swallow the write error
+                    console.warn('Vercel Read-Only Filesystem prevented JSON update:', writeErr);
+                }
+                return NextResponse.json({ success: true, warning: 'Deleted from fallback store' });
             }
         } catch (fsError) {
-            console.error("JSON fallback delete failed entirely:", fsError);
+            console.error('JSON fallback delete failed entirely:', fsError);
         }
 
         return NextResponse.json(
@@ -158,7 +160,7 @@ export async function DELETE(
             { status: 404 }
         );
     } catch (error) {
-        console.error("Delete Error Handler Catched:", error);
+        console.error('Delete Error Handler Caught:', error);
         return NextResponse.json(
             { error: 'Failed to delete project', details: (error as Error).message },
             { status: 500 }
