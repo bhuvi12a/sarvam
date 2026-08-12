@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getAllProjects, writeData } from '@/lib/dataStore';
+import path from 'path';
 
 export const maxDuration = 60; // Max allowed for Vercel hobby plan
 export const dynamic = 'force-dynamic';
