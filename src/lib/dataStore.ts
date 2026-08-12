@@ -76,11 +76,24 @@ export async function updateData<T>(
     try {
         const db = await getDb();
         const collection = db.collection(collectionName);
-        const result = await collection.updateOne(
-            { _id: new ObjectId(id) },
-            { $set: data }
-        );
-        return result.modifiedCount > 0;
+        
+        let result;
+        if (ObjectId.isValid(id) && id.length === 24) {
+            result = await collection.updateOne(
+                { _id: new ObjectId(id) },
+                { $set: data }
+            );
+        }
+        
+        // If not updated by _id, try by string 'id'
+        if (!result || result.matchedCount === 0) {
+            result = await collection.updateOne(
+                { id },
+                { $set: data }
+            );
+        }
+        
+        return result.modifiedCount > 0 || result.matchedCount > 0;
     } catch (error) {
         console.error('Error updating MongoDB:', error);
         return false;
@@ -155,19 +168,23 @@ export async function findById<T>(
 
 // Higher-level helpers
 export async function getAllProperties() {
+    let properties: any[] = [];
     try {
-        return await readData<any>('properties');
+        properties = await readData<any>('properties');
     } catch (error) {
-        return await readDataFromJSON<any>('properties');
+        properties = await readDataFromJSON<any>('properties');
     }
+    return properties.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
 }
 
 export async function getAllProjects() {
+    let projects: any[] = [];
     try {
-        return await readData<any>('projects');
+        projects = await readData<any>('projects');
     } catch (error) {
-        return await readDataFromJSON<any>('projects');
+        projects = await readDataFromJSON<any>('projects');
     }
+    return projects.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
 }
 
 export async function getPropertyById(id: string) {

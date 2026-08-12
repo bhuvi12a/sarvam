@@ -52,15 +52,16 @@ export function PromoPopup() {
                         {/* Interactive Clickable Image Area */}
                         <div 
                             onClick={handleCall}
-                            className="cursor-pointer relative aspect-square w-full group overflow-hidden"
+                            className="cursor-pointer relative w-full group overflow-hidden"
                             title="Call Sarvam Builders"
                         >
                             <Image
-                                src="/popup.jpg"
-                                alt="Sarvam Builders Special Offer"
-                                fill
+                                src="/prestigious-imperial-poster.jpg"
+                                alt="Prestigious Imperial Special Offer"
+                                width={800}
+                                height={600}
                                 sizes="(max-w-480px) 100vw, 480px"
-                                className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                                className="object-contain w-full h-auto transition-transform duration-500 group-hover:scale-[1.03]"
                                 priority
                             />
                             

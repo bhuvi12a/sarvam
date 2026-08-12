@@ -5,6 +5,7 @@ import { getProjectById, getAllProjects } from '@/lib/dataStore';
 import { MapPin, Phone, MessageSquare, ArrowLeft, Share2, Heart, CheckCircle2, Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
+import { ImageSlider } from '@/components/ImageSlider';
 
 interface Props {
     params: Promise<{ id: string }>;
@@ -84,16 +85,10 @@ export default async function ProjectDetailPage({ params }: Props) {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                     {/* Left Column: Media & Description */}
                     <div className="lg:col-span-2 space-y-8">
-                        {/* Main Image */}
-                        <div className="relative aspect-video rounded-[2.5rem] overflow-hidden shadow-2xl">
-                            <Image
-                                src={project.imageUrl || '/projects_banner.png'}
-                                alt={project.title}
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                            <div className="absolute top-8 left-8">
+                        {/* Main Image Slider */}
+                        <div className="relative">
+                            <ImageSlider images={project.gallery && project.gallery.length > 0 ? project.gallery : [project.imageUrl || '/projects_banner.png']} />
+                            <div className="absolute top-8 left-8 z-10 pointer-events-none">
                                 <span className="bg-white/90 backdrop-blur-md text-primary px-6 py-2 rounded-full text-sm font-bold shadow-xl border border-primary/10">
                                     {project.status}
                                 </span>
@@ -129,7 +124,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                         </div>
 
                         {/* Description */}
-                        <div className="prose prose-lg max-w-none text-gray-600">
+                        <div className="prose prose-lg max-w-none text-gray-600 mb-12">
                             <h2 className="text-2xl font-bold text-gray-900 mb-4">Project Overview</h2>
                             <p className="text-xl leading-relaxed">
                                 {project.description}

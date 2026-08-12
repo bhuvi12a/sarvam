@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
-import { readData, writeData } from '@/lib/dataStore';
+import { getAllProperties, writeData } from '@/lib/dataStore';
+
+export const maxDuration = 60; // Max allowed for Vercel hobby plan
+export const dynamic = 'force-dynamic';
 
 interface Property {
     id?: string;
@@ -16,11 +19,6 @@ interface Property {
     featured: boolean;
     createdAt: string;
 }
-
-import path from 'path';
-
-export const maxDuration = 60; // Max allowed for Vercel hobby plan
-export const dynamic = 'force-dynamic';
 
 // Helper: read from local properties.json (fallback only)
 async function readFromJson(): Promise<Property[]> {
@@ -42,62 +40,12 @@ async function writeToJson(properties: Property[]): Promise<void> {
 }
 
 export async function GET() {
-    let mongoProperties: Property[] = [];
-    let jsonProperties: Property[] = [];
-    let mockProperties: Property[] = [];
-
-    // 1. Try MongoDB
     try {
-        mongoProperties = await readData<Property>('properties');
+        const properties = await getAllProperties();
+        return NextResponse.json(properties);
     } catch (error) {
-        console.warn('MongoDB unavailable for GET /api/properties:', (error as Error).message);
+        return NextResponse.json({ error: 'Internal Error' }, { status: 500 });
     }
-
-    // 2. Try reading from properties.json
-    try {
-        jsonProperties = await readFromJson();
-    } catch (fsError) {
-        console.warn('Failed to read properties.json:', fsError);
-    }
-
-    // 3. Load mockData as a base if everything else is sparse
-    try {
-        const mockData = await import('@/data/mockData');
-        mockProperties = mockData.PROPERTIES.map((prop: any) => ({
-            ...prop,
-            featured: prop.featured ?? true,
-            createdAt: prop.createdAt || new Date().toISOString(),
-        }));
-    } catch (error) {
-        console.error('Failed to load mockData:', error);
-    }
-
-    // 4. Merge results with deduplication by title
-    const allPropertiesMap = new Map<string, Property>();
-
-    // Mock data as lowest priority
-    mockProperties.forEach(p => {
-        if (p.title) allPropertiesMap.set(p.title.toLowerCase().trim(), p);
-    });
-
-    // JSON properties second
-    jsonProperties.forEach(p => {
-        if (p.title) allPropertiesMap.set(p.title.toLowerCase().trim(), p);
-    });
-
-    // MongoDB as highest priority
-    mongoProperties.forEach(p => {
-        if (p.title) allPropertiesMap.set(p.title.toLowerCase().trim(), p);
-    });
-
-    const combinedProperties = Array.from(allPropertiesMap.values());
-
-    // Sort by createdAt descending
-    combinedProperties.sort((a, b) => {
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    });
-
-    return NextResponse.json(combinedProperties);
 }
 
 export async function POST(req: Request) {

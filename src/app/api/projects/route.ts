@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { readData, writeData } from '@/lib/dataStore';
-import path from 'path';
+import { getAllProjects, writeData } from '@/lib/dataStore';
 
 export const maxDuration = 60; // Max allowed for Vercel hobby plan
 export const dynamic = 'force-dynamic';
@@ -12,6 +11,7 @@ interface Project {
     location: string;
     status: string;
     imageUrl: string;
+    gallery?: string[];
     price?: string;
     featured: boolean;
     createdAt: string;
@@ -37,25 +37,15 @@ async function writeToJson(projects: Project[]): Promise<void> {
 }
 
 export async function GET() {
-    // ── MongoDB is the single source of truth ──────────────────────────────
-    // When MongoDB responds, use ONLY its data (so admin deletes take effect).
-    // Only fall back to projects.json if MongoDB is completely unreachable.
     try {
-        const mongoProjects = await readData<Project>('projects');
-        mongoProjects.sort((a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        const projects = await getAllProjects();
+        return NextResponse.json(projects);
+    } catch (error) {
+        return NextResponse.json(
+            { error: 'Failed to fetch projects' },
+            { status: 500 }
         );
-        return NextResponse.json(mongoProjects);
-    } catch (mongoError) {
-        console.warn('MongoDB unavailable, serving projects.json fallback:', (mongoError as Error).message);
     }
-
-    // ── Emergency fallback: read from bundled projects.json ────────────────
-    const jsonProjects = await readFromJson();
-    jsonProjects.sort((a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
-    return NextResponse.json(jsonProjects);
 }
 
 export async function POST(req: Request) {

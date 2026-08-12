@@ -97,5 +97,20 @@
         "imageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
         "featured": true,
         "createdAt": "2026-06-04T10:20:00.000Z"
+    },
+    {
+        "id": "prestigious-imperial",
+        "title": "Prestigious Imperial",
+        "description": "Prestigious Imperial by Sarvam Builders & Realtors is a premium residential project located on Bagalur Road, Hosur, offering modern luxury villas and premium villa plots in a prime on-road location. The project features 25+ world-class amenities, including a clubhouse, swimming pool, gym, children’s play area, landscaped gardens, 24×7 security, multipurpose court, and more. Loan facilities are available, making it an ideal choice for comfortable and luxurious living.",
+        "location": "Bagalur Road, Hosur",
+        "status": "ongoing",
+        "price": "₹5399 / sq.ft",
+        "imageUrl": "/prestigious-imperial-1.jpg",
+        "gallery": [
+            "/prestigious-imperial-1.jpg",
+            "/prestigious-imperial-3.jpg"
+        ],
+        "featured": true,
+        "createdAt": "2026-08-12T15:34:42.000Z"
     }
 ]
