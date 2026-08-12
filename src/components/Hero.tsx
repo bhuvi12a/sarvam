@@ -69,7 +69,7 @@ export function Hero() {
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
                 style={{
-                    backgroundImage: 'url("https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2600&auto=format&fit=crop")'
+                    backgroundImage: 'url("/hero-independence.png")'
                 }}
             >
                 <div className="absolute inset-0 bg-black/40 dark:bg-black/50" />
@@ -77,14 +77,6 @@ export function Hero() {
 
             {/* Content */}
             <div className="relative z-10 w-full max-w-5xl px-4 sm:px-6 lg:px-8 text-center text-white flex flex-col items-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-semibold tracking-wide uppercase text-yellow-400 mb-6 hover:bg-white/15 transition-all shadow-lg"
-                >
-                    ⭐ Low Budget Plots in Hosur
-                </motion.div>
 
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
