@@ -63,9 +63,10 @@ export async function writeData<T extends { id?: string }>(
     const collection = db.collection(collectionName);
 
     const { id, ...docData } = data;
-    const result = await collection.insertOne(docData);
+    const payload = id ? { _id: id, ...docData } : docData;
+    const result = await collection.insertOne(payload);
 
-    return { ...data, id: result.insertedId.toString() };
+    return { ...data, id: id || result.insertedId.toString() };
 }
 
 export async function updateData<T>(

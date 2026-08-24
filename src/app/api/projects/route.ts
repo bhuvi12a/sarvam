@@ -5,6 +5,15 @@ import path from 'path';
 export const maxDuration = 60; // Max allowed for Vercel hobby plan
 export const dynamic = 'force-dynamic';
 
+function slugify(text: string): string {
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+}
+
 interface Project {
     id?: string;
     title: string;
@@ -63,6 +72,7 @@ export async function POST(req: Request) {
 
         const newProject: Project = {
             ...body,
+            id: body.id || slugify(body.title),
             featured: body.featured ?? false,
             createdAt: new Date().toISOString(),
         };
