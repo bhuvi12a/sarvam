@@ -4,21 +4,20 @@ import { Metadata } from "next";
 import { PageBanner } from "@/components/PageBanner";
 
 export const metadata: Metadata = {
-    title: "Our Services",
-    description: "Comprehensive real estate services including property sales, home loans, construction, borewell installation, interior design, and architecture. Complete solutions for all your property needs.",
+    title: "Real Estate Services in Hosur - Home Loans, Construction & Design",
+    description: "Explore end-to-end real estate services by Sarvam: DTCP plot sales, 2BHK/3BHK villa construction, home loan sanctioning, interior design & architectural planning in Hosur.",
     keywords: [
-        "real estate services",
-        "property services",
-        "home loan assistance",
-        "construction services",
-        "interior design",
-        "architecture services",
-        "borewell installation",
-        "property development services",
+        "real estate services hosur",
+        "villa construction in hosur",
+        "home loan assistance hosur",
+        "interior design hosur",
+        "architecture services hosur",
+        "dtcp plot sales hosur"
     ],
     openGraph: {
-        title: "Real Estate Services - Sarvam",
-        description: "Complete real estate solutions including property sales, home loans, construction, and interior design services.",
+        title: "Real Estate Services in Hosur | Home Loans, Construction & Design",
+        description: "Complete real estate solutions including DTCP plot sales, home loans, construction, and interior design services in Hosur.",
+        url: "/services",
     },
     alternates: {
         canonical: "/services",
@@ -26,6 +25,44 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000');
+
+    const jsonLd = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            'serviceType': 'Real Estate & Construction Services',
+            'provider': {
+                '@type': 'RealEstateAgent',
+                'name': 'Sarvam Real Estate',
+                'url': baseUrl
+            },
+            'areaServed': {
+                '@type': 'City',
+                'name': 'Hosur'
+            },
+            'description': 'End-to-end real estate services by Sarvam: DTCP plot sales, 2BHK/3BHK villa construction, home loan sanctioning, interior design & architectural planning in Hosur.'
+        },
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+                {
+                    '@type': 'ListItem',
+                    'position': 1,
+                    'name': 'Home',
+                    'item': baseUrl
+                },
+                {
+                    '@type': 'ListItem',
+                    'position': 2,
+                    'name': 'Services',
+                    'item': `${baseUrl}/services`
+                }
+            ]
+        }
+    ];
+
     const services = [
         {
             icon: Landmark,
@@ -56,9 +93,13 @@ export default function ServicesPage() {
 
     return (
         <main className="min-h-screen bg-white">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <PageBanner
-                title="Our Services"
-                subtitle="Comprehensive real estate solutions tailored to your unique needs."
+                title="Real Estate Services in Hosur"
+                subtitle="Comprehensive real estate & construction solutions tailored to your needs."
                 imageSrc="/services_banner.png"
             />
 

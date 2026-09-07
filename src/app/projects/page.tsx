@@ -5,8 +5,20 @@ import { PageBanner } from "@/components/PageBanner";
 import { getAllProjects } from "@/lib/dataStore";
 
 export const metadata: Metadata = {
-    title: "Our Projects",
-    description: "Discover our latest residential and commercial developments.",
+    title: "Gated Community Villa Projects in Hosur",
+    description: "Discover ongoing and completed gated community villa projects and residential plot developments in Hosur & Bagalur Road by Sarvam Builders & Realtors.",
+    keywords: [
+        "gated community villas hosur",
+        "prestigious imperial hosur",
+        "residential projects hosur",
+        "bagalur road villas",
+        "villa projects in hosur"
+    ],
+    openGraph: {
+        title: "Gated Community Villa Projects in Hosur | Sarvam Real Estate",
+        description: "Discover ongoing and completed gated community villa projects and residential plot developments in Hosur & Bagalur Road.",
+        url: "/projects",
+    },
     alternates: {
         canonical: "/projects",
     },
@@ -30,11 +42,50 @@ export default async function ProjectsPage() {
         console.error("Failed to fetch projects", error);
     }
 
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000');
+
+    const jsonLd = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            'name': 'Gated Community Villa Projects in Hosur',
+            'description': 'Discover ongoing and completed gated community villa projects and residential plot developments in Hosur & Bagalur Road by Sarvam Builders & Realtors.',
+            'url': `${baseUrl}/projects`,
+            'publisher': {
+                '@type': 'Organization',
+                'name': 'Sarvam Real Estate',
+                'url': baseUrl
+            }
+        },
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+                {
+                    '@type': 'ListItem',
+                    'position': 1,
+                    'name': 'Home',
+                    'item': baseUrl
+                },
+                {
+                    '@type': 'ListItem',
+                    'position': 2,
+                    'name': 'Projects',
+                    'item': `${baseUrl}/projects`
+                }
+            ]
+        }
+    ];
+
     return (
         <main className="min-h-screen bg-white">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <PageBanner
-                title="Our Projects"
-                subtitle="Discover our latest residential and commercial developments."
+                title="Gated Community Villa Projects in Hosur"
+                subtitle="Discover our latest residential and commercial developments in Hosur & Bagalur Road."
                 imageSrc="/projects_banner.png"
             />
 

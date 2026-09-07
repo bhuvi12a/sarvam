@@ -14,15 +14,36 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { id } = await params;
     const project = await getProjectById(id);
-    if (!project) return { title: 'Project Not Found' };
+    if (!project) return { title: 'Project Not Found | Sarvam Real Estate Hosur' };
+
+    const formattedTitle = `${project.title} in ${project.location} | Sarvam Real Estate Hosur`;
+    const formattedDesc = `${project.description || ''} Explore premium villa projects and residential plot developments by Sarvam Builders & Realtors in ${project.location}.`.trim();
 
     return {
-        title: `${project.title} - Real Estate Project in ${project.location}`,
-        description: project.description,
+        title: formattedTitle,
+        description: formattedDesc,
+        keywords: [
+            project.title,
+            `${project.title} hosur`,
+            'projects in hosur',
+            'villas in hosur',
+            'low budget plots in hosur',
+            'sarvam builders project',
+            project.location,
+        ],
         openGraph: {
-            title: project.title,
-            description: project.description,
-            images: [{ url: project.imageUrl || '/projects_banner.png' }],
+            title: formattedTitle,
+            description: formattedDesc,
+            url: `/projects/${id}`,
+            siteName: 'Sarvam Real Estate',
+            images: [{ url: project.imageUrl || '/projects_banner.png', alt: project.title }],
+            type: 'article',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: formattedTitle,
+            description: formattedDesc,
+            images: [project.imageUrl || '/projects_banner.png'],
         },
         alternates: {
             canonical: `/projects/${id}`,
@@ -45,19 +66,49 @@ export default async function ProjectDetailPage({ params }: Props) {
         notFound();
     }
 
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'RealEstateListing',
-        'name': project.title,
-        'description': project.description,
-        'image': project.imageUrl,
-        'address': {
-            '@type': 'PostalAddress',
-            'addressLocality': project.location,
-            'addressCountry': 'IN'
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000');
+
+    const jsonLd = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'RealEstateListing',
+            'name': project.title,
+            'description': project.description,
+            'url': `${baseUrl}/projects/${project.id}`,
+            'image': [project.imageUrl || '/projects_banner.png'],
+            'address': {
+                '@type': 'PostalAddress',
+                'addressLocality': project.location,
+                'addressRegion': 'Tamil Nadu',
+                'addressCountry': 'IN'
+            },
+            'status': project.status
         },
-        'status': project.status
-    };
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+                {
+                    '@type': 'ListItem',
+                    'position': 1,
+                    'name': 'Home',
+                    'item': baseUrl
+                },
+                {
+                    '@type': 'ListItem',
+                    'position': 2,
+                    'name': 'Projects',
+                    'item': `${baseUrl}/projects`
+                },
+                {
+                    '@type': 'ListItem',
+                    'position': 3,
+                    'name': project.title,
+                    'item': `${baseUrl}/projects/${project.id}`
+                }
+            ]
+        }
+    ];
 
     return (
         <main className="min-h-screen bg-white pb-20">

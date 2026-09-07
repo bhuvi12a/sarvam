@@ -10,9 +10,9 @@ export function Footer() {
                     <div className="flex flex-col items-start gap-4">
                         <Link href="/" className="flex items-center gap-2">
                             <img
-                                src="/logo.png"
+                                src="/logo.png?v=4"
                                 alt="Sarvam Builders & Realtors"
-                                className="h-20 md:h-24 w-auto"
+                                className="h-12 md:h-14 w-auto object-contain bg-white p-1.5 rounded-lg shadow-sm"
                             />
                         </Link>
                         <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed max-w-xs">

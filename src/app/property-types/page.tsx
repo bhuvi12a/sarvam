@@ -4,14 +4,61 @@ import Image from "next/image";
 import { PageBanner } from "@/components/PageBanner";
 
 export const metadata: Metadata = {
-    title: "Property Types - Sarvam Real Estate",
-    description: "Explore the variety of residential, commercial, and agricultural property types we offer in Hosur & Krishnagiri.",
+    title: "Plots, Villas, Farmlands & Commercial Properties in Hosur",
+    description: "Explore property categories in Hosur: DTCP approved residential plots, luxury 2BHK/3BHK villas, agricultural farmlands, and commercial plots.",
+    keywords: [
+        "plots in hosur",
+        "villas in hosur",
+        "farmland in hosur",
+        "commercial land hosur",
+        "property types hosur"
+    ],
+    openGraph: {
+        title: "Plots, Villas & Commercial Properties for Sale in Hosur | Sarvam",
+        description: "Explore property categories in Hosur: DTCP approved residential plots, luxury 2BHK/3BHK villas, agricultural farmlands, and commercial plots.",
+        url: "/property-types",
+    },
     alternates: {
         canonical: "/property-types",
     },
 };
 
 export default function PropertyTypesPage() {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000');
+
+    const jsonLd = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            'name': 'Plots, Villas, Farmlands & Commercial Properties in Hosur',
+            'description': 'Explore property categories in Hosur: DTCP approved residential plots, luxury 2BHK/3BHK villas, agricultural farmlands, and commercial plots.',
+            'url': `${baseUrl}/property-types`,
+            'publisher': {
+                '@type': 'Organization',
+                'name': 'Sarvam Real Estate',
+                'url': baseUrl
+            }
+        },
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+                {
+                    '@type': 'ListItem',
+                    'position': 1,
+                    'name': 'Home',
+                    'item': baseUrl
+                },
+                {
+                    '@type': 'ListItem',
+                    'position': 2,
+                    'name': 'Property Types',
+                    'item': `${baseUrl}/property-types`
+                }
+            ]
+        }
+    ];
+
     const types = [
         {
             title: "Luxury Villas",
@@ -47,9 +94,13 @@ export default function PropertyTypesPage() {
 
     return (
         <main className="min-h-screen bg-white">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <PageBanner
-                title="Property Types"
-                subtitle="We offer a diverse range of properties to suit every lifestyle."
+                title="Property Types in Hosur"
+                subtitle="Explore residential plots, luxury 2BHK/3BHK villas, farmlands, and commercial sites."
                 imageSrc="/property_types_banner.png"
             />
 

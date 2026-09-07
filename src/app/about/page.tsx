@@ -5,12 +5,13 @@ import { Metadata } from "next";
 import { PageBanner } from "@/components/PageBanner";
 
 export const metadata: Metadata = {
-    title: "About Us",
-    description: "Learn about Sarvam Real Estate - your trusted partner in finding the perfect property. We specialize in residential, commercial, and land sales with expert guidance and personalized service.",
-    keywords: ["about sarvam real estate", "real estate company", "property experts", "trusted real estate agent"],
+    title: "About Sarvam Real Estate - Premier Builders & Realtors in Hosur",
+    description: "Learn about Sarvam Real Estate - Hosur's most trusted real estate builders with 10+ years of excellence in low budget plots, luxury villas, and land development.",
+    keywords: ["about sarvam real estate", "real estate company hosur", "sarvam builders hosur", "property dealers in hosur", "trusted real estate agent"],
     openGraph: {
-        title: "About Sarvam Real Estate",
-        description: "Your trusted partner in real estate - helping you find the perfect property with expert guidance.",
+        title: "About Sarvam Real Estate | Premier Builders & Realtors in Hosur",
+        description: "Your trusted partner in real estate - helping you find low budget plots and luxury villas in Hosur.",
+        url: "/about",
     },
     alternates: {
         canonical: "/about",
@@ -18,11 +19,36 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000');
+
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+            {
+                '@type': 'ListItem',
+                'position': 1,
+                'name': 'Home',
+                'item': baseUrl
+            },
+            {
+                '@type': 'ListItem',
+                'position': 2,
+                'name': 'About Us',
+                'item': `${baseUrl}/about`
+            }
+        ]
+    };
+
     return (
         <main className="min-h-screen bg-white">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <PageBanner
-                title="About Us"
-                subtitle="Building trust and homes for over a decade."
+                title="About Sarvam Real Estate"
+                subtitle="Building trust and homes in Hosur for over a decade."
                 imageSrc="/about_banner.png"
             />
 

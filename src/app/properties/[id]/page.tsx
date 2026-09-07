@@ -15,13 +15,36 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const property = await getPropertyById(id);
     if (!property) return { title: 'Contact Our Expert - Low Budget Plots in Hosur' };
 
+    const formattedTitle = `${property.title} in ${property.address} | Sarvam Real Estate Hosur`;
+    const formattedDesc = `${property.description || ''} Find luxury 2BHK/3BHK villas and low budget plots in Hosur with clear titles and DTCP approval. Price: ${property.price}.`.trim();
+
     return {
-        title: `${property.title} in ${property.address}`,
-        description: property.description,
+        title: formattedTitle,
+        description: formattedDesc,
+        keywords: [
+            property.title,
+            `${property.title} hosur`,
+            'villas in hosur',
+            'low budget plots in hosur',
+            '2bhk villas in hosur',
+            '3bhk villas in hosur',
+            'plots for sale in hosur',
+            property.address,
+            'sarvam builders hosur',
+        ],
         openGraph: {
-            title: property.title,
-            description: property.description,
-            images: [{ url: property.imageUrl }],
+            title: formattedTitle,
+            description: formattedDesc,
+            url: `/properties/${id}`,
+            siteName: 'Sarvam Real Estate',
+            images: [{ url: property.imageUrl, alt: property.title }],
+            type: 'article',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: formattedTitle,
+            description: formattedDesc,
+            images: [property.imageUrl],
         },
         alternates: {
             canonical: `/properties/${id}`,
@@ -107,23 +130,56 @@ export default async function PropertyDetailPage({ params }: Props) {
         );
     }
 
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'RealEstateListing',
-        'name': property.title,
-        'description': property.description,
-        'image': property.imageUrl,
-        'address': {
-            '@type': 'PostalAddress',
-            'addressLocality': property.address,
-            'addressCountry': 'IN'
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000');
+
+    const jsonLd = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'RealEstateListing',
+            'name': property.title,
+            'description': property.description,
+            'url': `${baseUrl}/properties/${property.id}`,
+            'image': [property.imageUrl],
+            'datePosted': property.createdAt,
+            'address': {
+                '@type': 'PostalAddress',
+                'streetAddress': property.address,
+                'addressLocality': 'Hosur',
+                'addressRegion': 'Tamil Nadu',
+                'addressCountry': 'IN'
+            },
+            'offers': {
+                '@type': 'Offer',
+                'price': property.price,
+                'priceCurrency': 'INR',
+                'availability': 'https://schema.org/InStock'
+            }
         },
-        'offers': {
-            '@type': 'Offer',
-            'price': property.price,
-            'priceCurrency': 'INR'
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+                {
+                    '@type': 'ListItem',
+                    'position': 1,
+                    'name': 'Home',
+                    'item': baseUrl
+                },
+                {
+                    '@type': 'ListItem',
+                    'position': 2,
+                    'name': 'Properties',
+                    'item': `${baseUrl}/properties`
+                },
+                {
+                    '@type': 'ListItem',
+                    'position': 3,
+                    'name': property.title,
+                    'item': `${baseUrl}/properties/${property.id}`
+                }
+            ]
         }
-    };
+    ];
 
     return (
         <main className="min-h-screen bg-white pb-20">

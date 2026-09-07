@@ -152,71 +152,76 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* Structured Data - Real Estate Organization */}
+        {/* Structured Data - Real Estate Organization & WebSite */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'RealEstateAgent',
-              name: 'Sarvam Real Estate',
-              image: [
-                `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/logo.png`,
-                `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/og-image.jpg`
-              ],
-              url: process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000'),
-              logo: `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/logo.png`,
-              description: 'Leading real estate company in Hosur specializing in villas, residential properties, commercial spaces, and land sales.',
-              telephone: '+919940066449',
-              email: 'info@sarvambuilders.com',
-              address: {
-                '@type': 'PostalAddress',
-                streetAddress: 'Pattalamman Nagar, Rayakottai Road',
-                addressLocality: 'Hosur',
-                addressRegion: 'Tamil Nadu',
-                postalCode: '635109',
-                addressCountry: 'IN'
-              },
-              geo: {
-                '@type': 'GeoCoordinates',
-                latitude: 12.7409,
-                longitude: 77.8253
-              },
-              areaServed: [
-                {
-                  '@type': 'City',
-                  name: 'Hosur'
+            __html: JSON.stringify([
+              {
+                '@context': 'https://schema.org',
+                '@type': 'RealEstateAgent',
+                '@id': `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/#organization`,
+                name: 'Sarvam Real Estate',
+                image: [
+                  `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/logo.png`,
+                  `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/og-image.jpg`
+                ],
+                url: process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000'),
+                logo: `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/logo.png`,
+                description: 'Leading real estate agency in Hosur & Krishnagiri specializing in low budget plots, luxury 2BHK/3BHK villas, and commercial land sales.',
+                telephone: '+919940066449',
+                email: 'info@sarvambuilders.com',
+                address: {
+                  '@type': 'PostalAddress',
+                  streetAddress: 'Pattalamman Nagar, Rayakottai Road',
+                  addressLocality: 'Hosur',
+                  addressRegion: 'Tamil Nadu',
+                  postalCode: '635109',
+                  addressCountry: 'IN'
                 },
-                {
-                  '@type': 'City',
-                  name: 'Krishnagiri'
+                geo: {
+                  '@type': 'GeoCoordinates',
+                  latitude: 12.7409,
+                  longitude: 77.8253
                 },
-                {
-                  '@type': 'City',
-                  name: 'Bangalore'
+                areaServed: [
+                  { '@type': 'City', name: 'Hosur' },
+                  { '@type': 'City', name: 'Krishnagiri' },
+                  { '@type': 'City', name: 'Bangalore' }
+                ],
+                priceRange: '₹5 Lakhs - ₹5 Crores',
+                openingHoursSpecification: [
+                  {
+                    '@type': 'OpeningHoursSpecification',
+                    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                    opens: '09:00',
+                    closes: '21:00'
+                  }
+                ],
+                sameAs: [
+                  'https://youtube.com/@sarvambuildersrealtors?si=tQHfD7SHbMchwcp7'
+                ],
+              },
+              {
+                '@context': 'https://schema.org',
+                '@type': 'WebSite',
+                '@id': `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/#website`,
+                url: process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000'),
+                name: 'Sarvam Real Estate',
+                description: 'Low Budget Plots & Luxury Villas for Sale in Hosur',
+                publisher: {
+                  '@id': `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/#organization`
+                },
+                potentialAction: {
+                  '@type': 'SearchAction',
+                  target: {
+                    '@type': 'EntryPoint',
+                    urlTemplate: `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/properties?search={search_term_string}`
+                  },
+                  'query-input': 'required name=search_term_string'
                 }
-              ],
-              priceRange: '₹5 Lakhs - ₹5 Crores',
-              openingHoursSpecification: [
-                {
-                  '@type': 'OpeningHoursSpecification',
-                  dayOfWeek: [
-                    'Monday',
-                    'Tuesday',
-                    'Wednesday',
-                    'Thursday',
-                    'Friday',
-                    'Saturday',
-                    'Sunday'
-                  ],
-                  opens: '09:00',
-                  closes: '21:00'
-                }
-              ],
-              sameAs: [
-                'https://youtube.com/@sarvambuildersrealtors?si=tQHfD7SHbMchwcp7'
-              ],
-            }),
+              }
+            ]),
           }}
         />
       </head>
