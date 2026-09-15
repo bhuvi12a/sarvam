@@ -60,13 +60,14 @@ export const metadata: Metadata = {
   publisher: 'Sarvam Real Estate',
   icons: {
     icon: [
-      { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
-      { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
-      { url: '/favicon.png', type: 'image/png' },
+      { url: '/favicon-48x48.png?v=5', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-192x192.png?v=5', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon-512x512.png?v=5', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon.png?v=5', type: 'image/png' },
+      { url: '/favicon.ico?v=5', sizes: 'any' },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
-    shortcut: '/favicon.png',
+    apple: [{ url: '/apple-touch-icon.png?v=5', sizes: '180x180', type: 'image/png' }],
+    shortcut: '/favicon.png?v=5',
   },
   formatDetection: {
     email: false,
