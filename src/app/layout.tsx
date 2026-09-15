@@ -60,14 +60,14 @@ export const metadata: Metadata = {
   publisher: 'Sarvam Real Estate',
   icons: {
     icon: [
-      { url: '/favicon-48x48.png?v=5', sizes: '48x48', type: 'image/png' },
-      { url: '/favicon-192x192.png?v=5', sizes: '192x192', type: 'image/png' },
-      { url: '/favicon-512x512.png?v=5', sizes: '512x512', type: 'image/png' },
-      { url: '/favicon.png?v=5', type: 'image/png' },
-      { url: '/favicon.ico?v=5', sizes: 'any' },
+      { url: '/favicon-48x48.png?v=7', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-192x192.png?v=7', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon-512x512.png?v=7', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon.png?v=7', type: 'image/png' },
+      { url: '/favicon.ico?v=7', sizes: 'any' },
     ],
-    apple: [{ url: '/apple-touch-icon.png?v=5', sizes: '180x180', type: 'image/png' }],
-    shortcut: '/favicon.png?v=5',
+    apple: [{ url: '/apple-touch-icon.png?v=7', sizes: '180x180', type: 'image/png' }],
+    shortcut: '/favicon.png?v=7',
   },
   formatDetection: {
     email: false,
@@ -144,10 +144,10 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         {/* Additional SEO tags */}
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=7" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=7" />
+        <link rel="shortcut icon" href="/favicon.ico?v=7" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=7" />
         <link rel="manifest" href="/manifest.json" />
 
         {/* Preconnect to external domains for performance */}

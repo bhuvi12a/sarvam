@@ -177,9 +177,10 @@ export function Navbar() {
         <div className="flex items-center h-full">
             <Link href="/" className="border-0 flex-shrink-0 flex items-center justify-center h-full py-1">
                 <img
-                    src="/logo.png?v=4"
+                    src="/logo.png?v=7"
                     alt="Sarvam Builders & Realtors"
-                    className="h-full w-auto transition-transform hover:scale-105"
+                    className="h-12 md:h-14 lg:h-16 max-h-[64px] w-auto object-contain transition-transform hover:scale-105"
+                    style={{ imageRendering: '-webkit-optimize-contrast' }}
                 />
             </Link>
         </div>
@@ -189,9 +190,10 @@ export function Navbar() {
     const MobileLogo = () => (
         <Link href="/" className="border-0 flex-shrink-0 flex items-center h-full py-1">
             <img
-                src="/logo.png?v=4"
+                src="/logo.png?v=7"
                 alt="Sarvam Builders & Realtors"
-                className="h-full w-auto transition-transform hover:scale-105"
+                className="h-10 sm:h-12 max-h-[52px] w-auto object-contain transition-transform hover:scale-105"
+                style={{ imageRendering: '-webkit-optimize-contrast' }}
             />
         </Link>
     );
