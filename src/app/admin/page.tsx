@@ -1,18 +1,13 @@
 import { Building2, FolderKanban, MessageSquare } from "lucide-react";
+import { getAllProperties, getAllProjects, readData } from '@/lib/dataStore';
 
 async function getStats() {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000');
-
     try {
-        const [propertiesRes, projectsRes, inquiriesRes] = await Promise.all([
-            fetch(`${baseUrl}/api/properties`, { cache: 'no-store' }),
-            fetch(`${baseUrl}/api/projects`, { cache: 'no-store' }),
-            fetch(`${baseUrl}/api/contact`, { cache: 'no-store' }),
+        const [properties, projects, inquiries] = await Promise.all([
+            getAllProperties().catch(() => []),
+            getAllProjects().catch(() => []),
+            readData<any>('inquiries').catch(() => []),
         ]);
-
-        const properties = await propertiesRes.json();
-        const projects = await projectsRes.json();
-        const inquiries = await inquiriesRes.json();
 
         return {
             propertyCount: Array.isArray(properties) ? properties.length : 0,

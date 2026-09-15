@@ -50,7 +50,9 @@ export function proxy(request: NextRequest) {
 
 // Fallback for older versions or if the convention only renamed the file
 export const middleware = proxy;
+export default proxy;
 
 export const config = {
     matcher: '/admin/:path*',
 };
+
