@@ -1,5 +1,19 @@
 [
     {
+        "id": "nexus-villas-property",
+        "title": "Nexus Villas - Luxury Gated Community Villas",
+        "description": "Exclusive HNTDA & RERA approved premium 2BHK, 3BHK & 4BHK gated community villas for sale in Hosur. Features individual EB connection, continuous borewell water supply, private compound walls, 100% Vaastu compliance, and modern amenities near Chaitanya School.",
+        "address": "Trend City (Near Chaitanya School), Hosur",
+        "price": "₹4,899 / sq.ft",
+        "type": "sale",
+        "beds": 3,
+        "baths": 3,
+        "sqft": 1800,
+        "imageUrl": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800",
+        "featured": true,
+        "createdAt": "2026-10-09T12:00:00.000Z"
+    },
+    {
         "id": "1",
         "title": "Premium Gated Community Plots",
         "description": "Premium residential plots for sale in a fully developed gated community in Rayakottai Road, Hosur. Features high-quality blacktop roads, underground electricity, immediate HNTDA approval, streetlights, and 24/7 security. Ready for immediate villa construction.",

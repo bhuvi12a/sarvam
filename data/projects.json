@@ -1,5 +1,20 @@
 [
     {
+        "id": "nexus-villas-trend-city",
+        "title": "Nexus Villas - Trend City",
+        "description": "Exclusive HNTDA & RERA approved premium villa community. Features state-of-the-art underground drainage, individual Electricity Board (EB) connection, and a high-yield borewell system for continuous water supply. A blend of convenience and modern infrastructure near Chaitanya School, Hosur.",
+        "location": "Trend City (Near Chaitanya School), Hosur",
+        "status": "ongoing",
+        "price": "₹4,899 / sq.ft.",
+        "imageUrl": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800",
+        "gallery": [
+            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800",
+            "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800"
+        ],
+        "featured": true,
+        "createdAt": "2026-10-09T12:05:00.000Z"
+    },
+    {
         "id": "villas-in-hosur",
         "title": "Villas in Hosur",
         "description": "Explore premium luxury independent villas and gated community houses for sale in Hosur. Architecturally brilliant 2BHK, 3BHK, and 4BHK villas featuring continuous borewell water supply, private compound walls, absolute vaastu compliance, and premium community layouts.",
