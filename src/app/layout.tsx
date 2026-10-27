@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: 'Sarvam Real Estate - Low Budget Plots & Villas for Sale in Hosur',
     template: '%s | Sarvam Real Estate Hosur',
   },
-  description: 'Sarvam Real Estate is the premier agency for premium & low budget plots in Hosur. Discover luxury 2BHK/3BHK villas, residential plots, and commercial lands in Hosur & Krishnagiri. Trusted builders with 10+ years of excellence.',
+  description: 'Sarvam Real Estate is the premier agency for premium & low budget plots in Hosur. Discover luxury 2BHK/3BHK villas, residential plots, and commercial lands in Hosur & Krishnagiri. Trusted builders with 18+ years of excellence founded by Anand Prabhu.',
   keywords: [
     '2bhk villas in hosur',
     '3bhk villas in hosur',
@@ -170,7 +170,13 @@ export default function RootLayout({
                 ],
                 url: process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000'),
                 logo: `${process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://sarvambuilders.com' : 'http://localhost:3000')}/logo.png`,
-                description: 'Leading real estate agency in Hosur & Krishnagiri specializing in low budget plots, luxury 2BHK/3BHK villas, and commercial land sales.',
+                description: 'Leading real estate agency in Hosur & Krishnagiri specializing in low budget plots, luxury 2BHK/3BHK villas, and commercial land sales. Founded by Anand Prabhu with 18+ years of industry leadership.',
+                founder: {
+                  '@type': 'Person',
+                  name: 'Anand Prabhu',
+                  jobTitle: 'Founder & CEO',
+                  description: 'Founder & CEO of Sarvam Builders & Realtors with 18+ years in real estate development and construction.'
+                },
                 telephone: '+919940066449',
                 email: 'info@sarvambuilders.com',
                 address: {

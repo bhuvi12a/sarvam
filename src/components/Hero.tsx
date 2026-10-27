@@ -178,7 +178,7 @@ export function Hero() {
                         <span className="text-sm text-gray-300 mt-2 font-medium tracking-wide">Happy Clients</span>
                     </div>
                     <div className="flex flex-col items-center group cursor-default">
-                        <span className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400 group-hover:scale-110 transition-transform duration-300">10+</span>
+                        <span className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400 group-hover:scale-110 transition-transform duration-300">18+</span>
                         <span className="text-sm text-gray-300 mt-2 font-medium tracking-wide">Years Exp</span>
                     </div>
                     <div className="flex flex-col items-center group cursor-default">
